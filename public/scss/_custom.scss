@@ -1,0 +1,1210 @@
+// scss/_custom.scss
+
+// === Section: 頂端橫幅 ===
+.c-top-header {
+  display: none; // 手機版隱藏
+
+  @include media-breakpoint-up(md) {
+    display: block; // 平板以上顯示
+  }
+
+  background-color: #fff;
+  border-bottom: 1px solid $gray-300;
+
+  &__toolbar-bar {
+    background-color: $gray-200;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: 30px;
+  }
+
+  &__container {
+    margin: 0 auto;
+    max-width: 1100px;
+  }
+
+  &__toolbar {
+    align-items: center;
+    display: flex;
+    font-size: 0.875rem;
+    gap: 0.5rem;
+    height: 30px;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+
+    @include media-breakpoint-up(md) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__toolbar-link {
+    color: $gray-700;
+    font-weight: 600;
+    text-decoration: none;
+
+    &--highlight {
+      color: $danger;
+    }
+
+    &--home {
+      color: $primary;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__toolbar-divider {
+    color: $gray-500;
+  }
+
+  &__logo-link {
+    display: inline-flex;
+  }
+
+  &__logo {
+    max-width: 280px;
+  }
+
+  &__ad-link {
+    display: inline-flex;
+  }
+
+  &__ad-image {
+    max-width: 260px;
+  }
+}
+
+// === Section: 手機版導覽列 ===
+.c-mobile-nav {
+  display: block; // 手機版顯示
+  background-color: #0f75b6;
+  box-shadow: 0 2px 4px rgba($black, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: $zindex-sticky;
+
+  @include media-breakpoint-up(md) {
+    display: none; // 平板以上隱藏
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    height: 56px;
+    border-bottom: 1px solid lighten(#0f75b6, 10%);
+  }
+
+  &__home-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      opacity: 0.8;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    text-align: center;
+    color: $white;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-shadow: 0 1px 2px rgba($black, 0.15);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 0.5rem;
+  }
+
+  &__menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: $white;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      opacity: 0.8;
+      outline: none;
+    }
+
+    &[aria-expanded="true"] {
+      opacity: 0.8;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__dropdown {
+    background-color: darken(#0f75b6, 5%);
+    padding: 0.5rem 0;
+    border-top: 1px solid lighten(#0f75b6, 10%);
+  }
+
+  &__dropdown-link {
+    display: block;
+    padding: 0.875rem 1rem;
+    color: $white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    border-bottom: 1px solid rgba($white, 0.1);
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover,
+    &:focus {
+      background-color: rgba($white, 0.15);
+      color: $white;
+    }
+
+    &:active {
+      background-color: rgba($white, 0.2);
+    }
+  }
+}
+
+// === Section: 頂端導覽 ===
+.main-nav {
+  display: none; // 手機版隱藏
+
+  @include media-breakpoint-up(md) {
+    display: block; // 平板以上顯示
+  }
+
+  background-color: #0f75b6;
+  box-shadow: 0 2px 4px rgba($black, 0.15);
+  height: 60px;
+
+  .container-fluid {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1100px;
+    padding: 0;
+  }
+
+  .nav {
+    align-items: stretch;
+    display: flex;
+    flex: 1;
+    gap: 0;
+    height: 100%;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .nav-item {
+    align-items: stretch;
+    display: flex;
+    flex: 1 1 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    align-items: center;
+    border-radius: 0;
+    color: $white;
+    display: flex;
+    flex: 1 1 auto;
+    font-size: 1.875rem;
+    font-weight: 700;
+    height: 100%;
+    justify-content: center;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-shadow: 0 1px 1px rgba($black, 0.15);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+    &.active,
+    &:hover,
+    &:focus {
+      background-color: $danger;
+      color: $white;
+      opacity: 1;
+    }
+
+    &:not(.active) {
+      opacity: 0.85;
+    }
+  }
+}
+
+// === Section: 小導覽 ===
+.c-small-nav {
+  background-color: $white;
+  padding: 0.75rem 0;
+
+  &__container {
+    margin: 0 auto;
+    max-width: 1100px;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  &__list {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__link {
+    color: $gray-700;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $danger;
+      text-decoration: underline;
+    }
+  }
+
+  &__dot {
+    color: $gray-500;
+    font-size: 0.9375rem;
+  }
+
+  &__divider {
+    color: $gray-400;
+    font-size: 0.9375rem;
+  }
+}
+
+// === Section: 小標橫幅 ===
+.c-subhead-bar {
+  display: none; // 手機版隱藏
+
+  @include media-breakpoint-up(md) {
+    display: block; // 平板以上顯示
+  }
+
+  background: linear-gradient(180deg, lighten($gray-200, 6%) 0%, $gray-200 100%);
+  border: 1px solid $gray-300;
+  border-radius: $border-radius;
+  box-shadow: 0 2px 4px rgba($black, 0.08);
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+
+  &__left {
+    align-items: center;
+    color: $gray-700;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.125rem;
+    font-weight: 600;
+    gap: 0.5rem;
+    text-align: center;
+
+    @include media-breakpoint-up(md) {
+      text-align: left;
+    }
+  }
+
+  &__title {
+    color: $gray-900;
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  &__divider {
+    color: $gray-500;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    color: $gray-600;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  &__right {
+    color: $gray-600;
+    font-size: 0.9375rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+
+    @include media-breakpoint-up(md) {
+      text-align: right;
+    }
+  }
+}
+
+// === Section: 區域卡片容器 ===
+.c-region-grid {
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+}
+
+// === Section: 區域導覽大卡 ===
+.region-block {
+  align-items: center;
+  background-color: #cc3300;
+  color: $white;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  justify-content: flex-start;
+  height: 70px;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    gap: 1.5rem;
+    justify-content: space-between;
+    padding: 1.75rem 2rem;
+    height: auto;
+  }
+
+  .region-title,
+  .region-sub {
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .region-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    flex: 1;
+
+    @include media-breakpoint-up(md) {
+      font-size: clamp(2rem, 3vw + 0.5rem, 2.75rem);
+    }
+  }
+
+  .region-sub {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: right;
+    white-space: normal;
+
+    @include media-breakpoint-up(md) {
+      font-size: clamp(1.125rem, 1.5vw + 0.5rem, 1.5rem);
+      text-align: left;
+      white-space: nowrap;
+    }
+  }
+}
+
+// === Section: 小城市按鈕 ===
+.c-city-grid {
+  margin: 0 auto;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.city-row {
+  --bs-gutter-x: 0;
+  margin: 0;
+}
+
+.city-row > [class*="col-"] {
+  padding: 0;
+}
+
+// 手機版：每行第 3 個按鈕隱藏右邊框（col-4 每行顯示 3 個）
+.city-row > [class*="col-"]:nth-child(3) .city-block {
+  border-right: none;
+
+  @include media-breakpoint-up(md) {
+    border-right: 2px solid #fff; // 電腦版恢復右邊框
+  }
+}
+
+// 手機版：每行第 6 個按鈕也需要隱藏右邊框（因為會換行）
+.city-row > [class*="col-"]:nth-child(6) .city-block {
+  border-right: none;
+
+  @include media-breakpoint-up(md) {
+    border-right: 2px solid #fff; // 電腦版恢復右邊框
+  }
+}
+
+// 電腦版：每行最後一個按鈕隱藏右邊框（col-md-2 每行顯示 6 個）
+@include media-breakpoint-up(md) {
+  .city-row > [class*="col-"]:last-child .city-block {
+    border-right: none;
+  }
+}
+
+.city-row:last-child .city-block {
+  border-bottom: none;
+}
+
+.city-row+.city-row {
+  border-top: 2px solid #fff;
+}
+
+.city-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0080c0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-right: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  
+  // 手機版樣式
+  padding: 0.75rem 0.5rem;
+  font-size: 1rem;
+  height: 60px;
+
+  // 電腦版樣式（md 以上）
+  @include media-breakpoint-up(md) {
+    padding: 0.75rem 0;
+    font-size: 1.25rem;
+    height: 64px;
+  }
+
+  &:hover {
+    background-color: #666;
+    color: #FFC600;
+  }
+}
+
+// === Section: 下方廣告列 ===
+.c-ad-strip {
+  &__container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.c-ad-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+  padding: 0.75rem;
+  border: 1px solid #CACACA;
+  box-shadow: 0 8px 16px rgba($black, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba($black, 0.12);
+  }
+
+  &__media {
+    border-radius: 0.375rem;
+    overflow: hidden;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &__content {
+    display: none; // 手機版隱藏
+
+    @include media-breakpoint-up(md) {
+      display: flex; // 電腦版顯示
+    }
+
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__text {
+    margin: 0;
+    line-height: 1.6;
+    color: $gray-800;
+    font-size: 0.95rem;
+  }
+
+  &__highlight {
+    margin: 0;
+    color: $danger;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  &__link {
+    display: block;
+    margin: 0;
+    background-color: #fff9e6;
+    color: $primary;
+    font-weight: 700;
+    font-size: 0.9rem; // 手機版字體縮小
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.1rem; // 電腦版恢復原大小
+    }
+
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    border-radius: 0 0 0.375rem 0.375rem;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #fff9e6;
+      color: $danger;
+      text-decoration: none;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem 1.1rem;
+    background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+    color: $white;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: translate(40%, -55%) rotate(45deg);
+    transform-origin: center;
+    box-shadow: 0 6px 12px rgba($black, 0.16);
+  }
+
+  &--featured {
+    border-color: 1px solid #CACACA;
+    background: linear-gradient(135deg, #fffdf5 0%, #fff2cd 100%);
+
+    .c-ad-card__highlight {
+      letter-spacing: 0.05em;
+    }
+
+    .c-ad-card__link {
+      margin-left: -0.75rem;
+      margin-right: -0.75rem;
+      margin-bottom: -0.75rem;
+      width: calc(100% + 1.5rem);
+      border-radius: 0 0 0.375rem 0.375rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+      align-items: start;
+      flex-wrap: wrap;
+
+      .c-ad-card__media {
+        flex: 0 0 50%;
+      }
+
+      .c-ad-card__content {
+        flex: 1;
+      }
+
+      .c-ad-card__highlight {
+        text-align: left;
+      }
+
+      .c-ad-card__link {
+        flex: 1 1 100%;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+        margin-bottom: -0.75rem;
+        width: calc(100% + 1.5rem);
+        order: 3;
+      }
+    }
+  }
+
+  &--top {
+    background: url('../img/m-list-bk-top.jpg') center/cover no-repeat;
+    border-color: rgba($black, 0.08);
+    padding: 1.25rem;
+    gap: 1.25rem;
+
+    .c-ad-card__media {
+      background-color: rgba($white, 0.9);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba($black, 0.08);
+      overflow: hidden;
+      padding: 0.25rem;
+    }
+
+    .c-ad-card__img {
+      border-radius: 0.375rem;
+    }
+
+    .c-ad-card__content {
+      background-color: rgba($white, 0.92);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+    }
+
+    .c-ad-card__text {
+      color: $gray-900;
+      font-weight: 600;
+    }
+
+    .c-ad-card__highlight {
+      color: $primary;
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+
+    .c-ad-card__link {
+      background-color: #fff9e6;
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      margin-bottom: -1.25rem;
+      width: calc(100% + 2.5rem);
+    }
+
+    // 當同時使用 --featured 和 --top 時
+    &.c-ad-card--featured {
+      .c-ad-card__link {
+        margin-left: -1.25rem;
+        margin-right: -1.25rem;
+        margin-bottom: -1.25rem;
+        width: calc(100% + 2.5rem);
+      }
+    }
+  }
+
+  &--placeholder {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: $secondary;
+    background-color: rgba($secondary, 0.08);
+    border: 2px dashed rgba($secondary, 0.35);
+    font-weight: 600;
+  }
+}
+
+// === Section: Footer ===
+.c-footer {
+  background-color: #fff;
+  border-top: 1px solid $gray-300;
+  padding: 1rem 0;
+  margin-top: 2rem;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  &__container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  &__link {
+    color: $primary;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+    display: inline-block;
+
+    &:hover {
+      color: $danger;
+    }
+  }
+}
+
+// === Section: 注意事項 ===
+.c-notice {
+  margin: 2rem 0;
+  padding: 1.5rem 0;
+
+  &__container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  &__header-line-top,
+  &__header-line-bottom {
+    height: 1px;
+    background-color: $gray-400;
+    width: 100%;
+  }
+
+  &__header-line-top {
+    margin-bottom: 10px;
+  }
+
+  &__header-line-bottom {
+    margin-bottom: 1rem;
+  }
+
+  &__header {
+    text-align: start;
+  }
+
+  &__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: $gray-900;
+    display: inline-block;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: notice-counter;
+  }
+
+  &__item {
+    counter-increment: notice-counter;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+    color: $gray-900;
+    font-size: 12px;
+    padding-left: 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item-title {
+    font-weight: 700;
+    
+    &::before {
+      content: counter(notice-counter) "、";
+      font-weight: 700;
+    }
+  }
+
+  &__item-text {
+    font-weight: 400;
+  }
+}
+
+// === Section: 下方訊息 ===
+.c-bottom-info {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+
+  &__container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $gray-300;
+  }
+
+  &__nav-link {
+    color: $gray-700;
+    text-decoration: none;
+    font-size: 0.9375rem;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: $primary;
+      text-decoration: underline;
+    }
+  }
+
+  &__nav-divider {
+    color: $gray-400;
+    font-size: 0.9375rem;
+  }
+
+  &__warning {
+    background-color: #ff6600;
+    color: $white;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.5;
+    border-radius: $border-radius;
+  }
+
+  &__copyright {
+    text-align: center;
+    color: $gray-600;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  &__company {
+    text-align: center;
+    color: $gray-700;
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+}
+
+// === Section: 廣告內容區 ===
+.c-ad-wrapper {
+  width: 100%;
+  padding: 1.5rem 1rem;
+
+  &__container {
+    margin: 0 auto;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  &__title {
+    text-align: center;
+    color: $gray-700;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding: 0.75rem 0;
+    background-color: #F5F5F5;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.c-ad-content {
+  width: 100%;
+  border: 1px solid $gray-300;
+  border-radius: $border-radius;
+  background-color: $white;
+
+  @include media-breakpoint-up(md) {
+    padding: 0;
+  }
+
+  &__main-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__button {
+    display: block;
+    flex: 1 1 0;
+    min-width: 0;
+    height: auto;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+  }
+}
+
+// === Section: 廣告框 ===
+.adbox {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+
+  @include media-breakpoint-up(md) {
+    padding: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: $gray-600;
+    line-height: 1.6;
+    text-align: start;
+
+    @include media-breakpoint-up(md) {
+      font-size: 0.9375rem;
+    }
+  }
+}
+
+// === Section: 安全借錢警告區塊 ===
+.c-safety-notice {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid $gray-300;
+
+  &__title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $gray-900;
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__warning {
+    text-align: center;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: $danger;
+    margin-bottom: 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__rules {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+  }
+
+  &__rule {
+    flex: 1 1 0;
+    text-align: center;
+  }
+
+  &__rule-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: $gray-900;
+    margin-bottom: 0.75rem;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__rule-text {
+    font-size: 0.875rem;
+    color: $gray-700;
+    line-height: 1.6;
+    margin: 0;
+
+    @include media-breakpoint-up(md) {
+      font-size: 0.9375rem;
+    }
+  }
+}
+
+// === Section: 底部聯繫資訊 ===
+.c-contact-info {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid $gray-300;
+
+  &__main-title {
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $gray-900;
+    margin-bottom: 2rem;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  &__section {
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: $gray-900;
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      font-size: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  &__text {
+    font-size: 0.875rem;
+    color: $gray-700;
+    line-height: 1.8;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+
+    @include media-breakpoint-up(md) {
+      font-size: 0.9375rem;
+      margin-bottom: 1rem;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// === Section: RWD 微調 ===
+@include media-breakpoint-down(md) {
+  .c-top-header {
+    padding: 0.5rem 0 0.75rem;
+
+    &__logo,
+    &__ad-image {
+      max-width: 220px;
+    }
+  }
+
+  .region-block {
+    padding: 1rem;
+
+    .region-title {
+      font-size: 1.5rem;
+    }
+  }
+
+  .c-notice {
+    padding: 1rem 0;
+    margin: 1.5rem 0;
+
+    &__title {
+      font-size: 1.25rem;
+    }
+
+    &__item {
+      font-size: 0.9375rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .c-bottom-info {
+    padding: 1rem 0;
+
+    &__nav {
+      gap: 0.25rem;
+    }
+
+    &__nav-link,
+    &__nav-divider {
+      font-size: 0.875rem;
+    }
+
+    &__warning {
+      font-size: 0.875rem;
+      padding: 0.625rem 0.75rem;
+    }
+
+    &__copyright {
+      font-size: 0.8125rem;
+    }
+
+    &__company {
+      font-size: 0.875rem;
+    }
+  }
+}
