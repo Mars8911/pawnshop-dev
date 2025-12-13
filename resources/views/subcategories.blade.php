@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
-  <title>台灣借錢網 - 借錢直達｜在地．便利．快速！</title>
+  <title>台灣借錢網 - 分類頁面！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap 5 -->
   <link
@@ -20,14 +20,14 @@
         <div class="c-top-header__toolbar">
           <a href="#" class="c-top-header__toolbar-link c-top-header__toolbar-link--highlight">借錢廣告</a>
           <span class="c-top-header__toolbar-divider">|</span>
-          <a href="#" class="c-top-header__toolbar-link c-top-header__toolbar-link--home">返回首頁</a>
+          <a href="{{ route('home') }}" class="c-top-header__toolbar-link c-top-header__toolbar-link--home">返回首頁</a>
         </div>
       </div>
     </div>
     <div class="c-top-header__container">
       <div class="row align-items-center g-3">
         <div class="col-12 col-md-auto text-center text-md-start">
-          <a href="#" class="c-top-header__logo-link">
+          <a href="{{ route('home') }}" class="c-top-header__logo-link">
             <img
               src="{{ asset('img/logo.gif') }}"
               alt="台灣借錢網"
@@ -38,7 +38,7 @@
         <div class="col-12 col-md text-center text-md-end">
           <a href="#" class="c-top-header__ad-link">
             <img
-              src="{{ asset('img/logor.gif') }}"
+              src="/img/logor.gif"
               alt="廣告刊登"
               class="c-top-header__ad-image img-fluid"
             >
@@ -51,7 +51,7 @@
   <!-- 手機版導覽列 -->
   <nav class="c-mobile-nav">
     <div class="c-mobile-nav__container">
-      <a href="#" class="c-mobile-nav__home-icon" aria-label="返回首頁">
+      <a href="{{ route('home') }}" class="c-mobile-nav__home-icon" aria-label="返回首頁">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
           <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
         </svg>
@@ -114,87 +114,41 @@
           <div class="c-subhead-bar">
             <div class="c-subhead-bar__content">
               <div class="c-subhead-bar__left">
-                <span class="c-subhead-bar__title">借錢直達</span>
-                <span class="c-subhead-bar__divider">|</span>
-                <span class="c-subhead-bar__subtitle">在地．便利．快速！</span>
+                目前位置: 台灣借錢網》{{ $category->name ?? '分類頁面' }}
               </div>
-              <div class="c-subhead-bar__right">
-                借錢 借款 借貸 融資 當舖 票貼 二胎 貸款
+              <div class="c-subhead-bar__right c-subhead-bar__right--safety">
+                借錢不郵寄、不預付、不認證,安全借錢免受騙!
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 大區塊：台北借錢、新北借錢… -->
+      <!-- 大區塊：台北借錢、新北借錢（兩個大格） -->
       <section class="mb-3">
         <div class="c-region-grid">
-          <div class="row g-2 g-md-1 justify-content-center">
-          <!-- 台北借錢 -->
-          <div class="col-6 col-md-4">
-            <div class="region-block">
-              <div class="region-title">台北借錢</div>
-              <div class="region-sub">借錢<br>管道</div>
-            </div>
+          <div class="row g-0 justify-content-center">
+          <!-- 基隆 -->
+          <div class="col-6">
+            <a href="#" class="text-center text-decoration-none region-block region-block--keelung {{ (isset($category) && (stripos($category->name, '基隆') !== false || stripos($category->name, 'keelung') !== false)) ? 'region-block--active' : '' }}">
+              <div class="region-title">基隆</div>
+            </a>
           </div>
 
-          <!-- 新北借錢 -->
-          <div class="col-6 col-md-4">
-            <div class="region-block">
-              <div class="region-title">新北借錢</div>
-              <div class="region-sub">借錢<br>管道</div>
-            </div>
-          </div>
-
-          <!-- 桃園借錢 -->
-          <div class="col-6 col-md-4">
-            <div class="region-block">
-              <div class="region-title">桃園借錢</div>
-              <div class="region-sub">借錢<br>管道</div>
-            </div>
-          </div>
-
-          <!-- 下面第二排（台中借錢、台南借錢、高雄借錢） -->
-          <div class="col-6 col-md-4">
-            <div class="region-block">
-              <div class="region-title">台中借錢</div>
-              <div class="region-sub">借錢<br>管道</div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-4">
-            <div class="region-block">
-              <div class="region-title">台南借錢</div>
-              <div class="region-sub">借錢<br>管道</div>
-            </div>
-          </div>
-
-          <div class="col-6 col-md-4">
-            <div class="region-block">
-              <div class="region-title">高雄借錢</div>
-              <div class="region-sub">借錢<br>管道</div>
-            </div>
+          <!-- 台北 -->
+          <div class="col-6">
+            <a href="#" class="text-center text-decoration-none region-block region-block--taipei {{ (isset($category) && (stripos($category->name, '台北') !== false || stripos($category->name, 'taipei') !== false)) ? 'region-block--active' : '' }}">
+              <div class="region-title">台北</div>
+            </a>
           </div>
           </div>
         </div>
       </section>
 
-      <!-- 小城市按鈕列（藍色小格） -->
-      <section class="mb-4 c-city-grid">
-        <div class="row g-0 city-row">
-          @forelse($categories as $category)
-            <div class="col-4 col-md-2">
-              <a href="{{ route('category.show', $category->id) }}" class="city-block">{{ $category->name }}</a>
-            </div>
-          @empty
-            <div class="col-12">
-              <p class="text-center text-muted">目前沒有可用的類別</p>
-            </div>
-          @endforelse
-        </div>
-
-        <div class="row g-1 city-row">
-
+      <!-- 安全借錢圖片 -->
+      <section class="mb-4">
+        <div class="c-region-grid">
+          <img src="{{ asset('img/safety4.gif') }}" alt="安全借錢" class="img-fluid w-100">
         </div>
       </section>
 
@@ -202,30 +156,36 @@
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
           <div class="row g-3">
+            @forelse($ads as $ad)
             <div class="col-6 col-md-4">
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
-                    alt="雲嘉南小額借款廣告"
+                    src="{{ $ad->image ? asset('storage/' . $ad->image) : asset('img/105340821.jpg') }}"
+                    alt="{{ $ad->name ?? '廣告圖片' }}"
                     class="c-ad-card__img"
                   >
                 </div>
                 <div class="c-ad-card__content">
                   <p class="c-ad-card__text">
-                    小額借款，臨時周轉，免押證件，息低保密，手續簡便，借錢不求人，還款好輕鬆。
+                    {{ $ad->description ?? $ad->subtitle ?? '小額借款，臨時周轉，免押證件，息低保密，手續簡便，借錢不求人，還款好輕鬆。' }}
                   </p>
                 </div>
-                <a href="ad01.html" class="c-ad-card__link">
-                  小額借款，雲嘉南地區
+                <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="c-ad-card__link">
+                  {{ $ad->name ?? $ad->subtitle ?? '查看詳情' }}
                 </a>
               </div>
             </div>
+            @empty
+            <div class="col-12">
+              <p class="text-center text-muted">目前此類別下沒有可用的廣告</p>
+            </div>
+            @endforelse
             <div class="col-6 col-md-4">
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -244,7 +204,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -263,7 +223,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
+                    src="/img/105340821.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -282,7 +242,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -301,7 +261,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -320,7 +280,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
+                    src="/img/105340821.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -339,7 +299,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -358,7 +318,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -377,7 +337,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
+                    src="/img/105340821.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -396,7 +356,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -415,7 +375,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -434,7 +394,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
+                    src="/img/105340821.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -453,7 +413,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -472,7 +432,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -491,7 +451,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
+                    src="/img/105340821.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -510,7 +470,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -529,7 +489,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -548,7 +508,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/105340821.jpg') }}"
+                    src="/img/105340821.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -567,7 +527,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/091640791.jpg') }}"
+                    src="/img/091640791.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >
@@ -586,64 +546,7 @@
               <div class="c-ad-card c-ad-card--featured">
                 <div class="c-ad-card__media">
                   <img
-                    src="{{ asset('img/101340611.jpg') }}"
-                    alt="雲嘉南小額借款廣告"
-                    class="c-ad-card__img"
-                  >
-                </div>
-                <div class="c-ad-card__content">
-                  <p class="c-ad-card__text">
-                    客製方案，各大行業，本利攤還，火速撥款，免證件可貸，免保人可貸，免抵押。
-                  </p>
-                </div>
-                <a href="#" class="c-ad-card__link">
-                  當日撥款 借錢首選
-                </a>
-              </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="c-ad-card c-ad-card--featured">
-                <div class="c-ad-card__media">
-                  <img
-                    src="{{ asset('img/105340821.jpg') }}"
-                    alt="雲嘉南小額借款廣告"
-                    class="c-ad-card__img"
-                  >
-                </div>
-                <div class="c-ad-card__content">
-                  <p class="c-ad-card__text">
-                    小額借款，臨時周轉，免押證件，息低保密，手續簡便，借錢不求人，還款好輕鬆。
-                  </p>
-                </div>
-                <a href="#" class="c-ad-card__link">
-                  小額借款，雲嘉南地區
-                </a>
-              </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="c-ad-card c-ad-card--featured">
-                <div class="c-ad-card__media">
-                  <img
-                    src="{{ asset('img/091640791.jpg') }}"
-                    alt="雲嘉南小額借款廣告"
-                    class="c-ad-card__img"
-                  >
-                </div>
-                <div class="c-ad-card__content">
-                  <p class="c-ad-card__text">
-                    有工作來就借，小額借貸，現金週轉便利站，安心借輕鬆還，手續簡便，歡迎來電。
-                  </p>
-                </div>
-                <a href="#" class="c-ad-card__link">
-                  24H快速借款 好商量
-                </a>
-              </div>
-            </div>
-            <div class="col-6 col-md-4">
-              <div class="c-ad-card c-ad-card--featured">
-                <div class="c-ad-card__media">
-                  <img
-                    src="{{ asset('img/101340611.jpg') }}"
+                    src="/img/101340611.jpg"
                     alt="雲嘉南小額借款廣告"
                     class="c-ad-card__img"
                   >

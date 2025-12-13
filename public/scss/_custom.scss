@@ -439,6 +439,29 @@
     }
   }
 
+  // 基隆樣式（紅棕色）
+  &--keelung {
+    background-color: #8B4513; // 紅棕色
+
+    &:hover {
+      background-color: #cc3300 !important; // hover 時變紅色
+    }
+  }
+
+  // 台北樣式（淺藍色）
+  &--taipei {
+    background-color: #87CEEB; // 淺藍色
+
+    &:hover {
+      background-color: #cc3300 !important; // hover 時變紅色
+    }
+  }
+
+  // Active 狀態（紅色）
+  &--active {
+    background-color: #cc3300 !important; // 紅色
+  }
+
   .region-sub {
     font-size: 0.75rem;
     font-weight: 600;
@@ -513,7 +536,7 @@
   font-weight: 600;
   border-right: 2px solid #fff;
   border-bottom: 2px solid #fff;
-  
+
   // 手機版樣式
   padding: 0.75rem 0.5rem;
   font-size: 1rem;
@@ -841,7 +864,7 @@
 
   &__item-title {
     font-weight: 700;
-    
+
     &::before {
       content: counter(notice-counter) "、";
       font-weight: 700;
