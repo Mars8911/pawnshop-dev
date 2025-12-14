@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Ad;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,13 @@ class HomeController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('home', compact('categories'));
+        // 取得所有已刊登的廣告，不分區、不分類別，按排序順序
+        $ads = Ad::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('home', compact('categories', 'ads'));
     }
 }
 
