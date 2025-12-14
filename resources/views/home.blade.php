@@ -93,6 +93,9 @@
       <section class="mb-4 c-city-grid">
         <div class="row g-0 city-row">
           @forelse($categories as $category)
+            @if(stripos($category->name, '新北市') !== false || stripos($category->name, '台北市') !== false || stripos($category->name, '台北') !== false || stripos($category->name, '桃園') !== false)
+              @continue
+            @endif
             <div class="col-4 col-md-2">
               <a href="{{ route('category.show', $category->id) }}" class="city-block">{{ $category->name }}</a>
             </div>

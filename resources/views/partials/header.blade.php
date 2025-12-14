@@ -9,6 +9,57 @@
       ->orWhere('slug', 'new-taipei')
       ->orWhere('name', 'like', '%新北市%')
       ->first();
+
+  // 查詢桃竹苗分類（用於桃竹苗頁面，優先查詢桃園分類）
+  $taozhumeiCategory = \App\Models\Category::where('name', '桃園')
+      ->orWhere('slug', 'taoyuan')
+      ->orWhere('name', '新竹')
+      ->orWhere('slug', 'hsinchu')
+      ->orWhere('name', '苗栗')
+      ->orWhere('slug', 'miaoli')
+      ->orWhere('name', 'like', '%桃竹苗%')
+      ->first();
+
+  // 查詢中彰投分類（用於中彰投頁面，優先查詢台中分類）
+  $zhongzhangtouCategory = \App\Models\Category::where('name', '台中')
+      ->orWhere('slug', 'taichung')
+      ->orWhere('name', '彰化')
+      ->orWhere('slug', 'changhua')
+      ->orWhere('name', '南投')
+      ->orWhere('slug', 'nantou')
+      ->orWhere('name', 'like', '%中彰投%')
+      ->first();
+
+  // 查詢雲嘉南分類（用於雲嘉南頁面，優先查詢雲林分類）
+  $yunjiananCategory = \App\Models\Category::where('name', '雲林')
+      ->orWhere('slug', 'yunlin')
+      ->orWhere('name', '嘉義')
+      ->orWhere('slug', 'chiayi')
+      ->orWhere('name', 'like', '%雲嘉南%')
+      ->first();
+
+  // 查詢高屏區分類（用於高屏區頁面，優先查詢高雄分類）
+  $gaopingCategory = \App\Models\Category::where('name', '高雄')
+      ->orWhere('slug', 'kaohsiung')
+      ->orWhere('name', '屏東')
+      ->orWhere('slug', 'pingtung')
+      ->orWhere('name', 'like', '%高屏區%')
+      ->orWhere('name', 'like', '%高屏%')
+      ->first();
+
+  // 查詢東部離島分類（用於東部離島頁面，優先查詢宜蘭分類）
+  $dongbulidaoCategory = \App\Models\Category::where('name', '宜蘭')
+      ->orWhere('slug', 'yilan')
+      ->orWhere('name', '花蓮')
+      ->orWhere('slug', 'hualien')
+      ->orWhere('name', '台東')
+      ->orWhere('slug', 'taitung')
+      ->orWhere('name', '離島')
+      ->orWhere('slug', 'offshore')
+      ->orWhere('slug', 'offshore-islands')
+      ->orWhere('name', 'like', '%東部離島%')
+      ->orWhere('name', 'like', '%東部%')
+      ->first();
 @endphp
 
 <!-- 頂端 Logo + 廣告橫幅 -->
@@ -65,11 +116,11 @@
     <div class="c-mobile-nav__dropdown">
       <a href="{{ $keelungCategory ? route('category.show', $keelungCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">台北基隆</a>
       <a href="{{ $newtaipeiCategory ? route('category.show', $newtaipeiCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">新北市</a>
-      <a href="#" class="c-mobile-nav__dropdown-link">桃竹苗</a>
-      <a href="#" class="c-mobile-nav__dropdown-link">中彰投</a>
-      <a href="#" class="c-mobile-nav__dropdown-link">雲嘉南</a>
-      <a href="#" class="c-mobile-nav__dropdown-link">高屏區</a>
-      <a href="#" class="c-mobile-nav__dropdown-link">東部離島</a>
+      <a href="{{ $taozhumeiCategory ? route('category.show', $taozhumeiCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">桃竹苗</a>
+      <a href="{{ $zhongzhangtouCategory ? route('category.show', $zhongzhangtouCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">中彰投</a>
+      <a href="{{ $yunjiananCategory ? route('category.show', $yunjiananCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">雲嘉南</a>
+      <a href="{{ $gaopingCategory ? route('category.show', $gaopingCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">高屏區</a>
+      <a href="{{ $dongbulidaoCategory ? route('category.show', $dongbulidaoCategory->id) : '#' }}" class="c-mobile-nav__dropdown-link">東部離島</a>
     </div>
   </div>
 </nav>
@@ -85,19 +136,19 @@
         <a class="nav-link text-nowrap" href="{{ $newtaipeiCategory ? route('category.show', $newtaipeiCategory->id) : '#' }}">新北市</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-nowrap" href="#">桃竹苗</a>
+        <a class="nav-link text-nowrap" href="{{ $taozhumeiCategory ? route('category.show', $taozhumeiCategory->id) : '#' }}">桃竹苗</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-nowrap" href="#">中彰投</a>
+        <a class="nav-link text-nowrap" href="{{ $zhongzhangtouCategory ? route('category.show', $zhongzhangtouCategory->id) : '#' }}">中彰投</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-nowrap" href="#">雲嘉南</a>
+        <a class="nav-link text-nowrap" href="{{ $yunjiananCategory ? route('category.show', $yunjiananCategory->id) : '#' }}">雲嘉南</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-nowrap" href="#">高屏區</a>
+        <a class="nav-link text-nowrap" href="{{ $gaopingCategory ? route('category.show', $gaopingCategory->id) : '#' }}">高屏區</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-nowrap" href="#">東部離島</a>
+        <a class="nav-link text-nowrap" href="{{ $dongbulidaoCategory ? route('category.show', $dongbulidaoCategory->id) : '#' }}">東部離島</a>
       </li>
     </ul>
   </div>

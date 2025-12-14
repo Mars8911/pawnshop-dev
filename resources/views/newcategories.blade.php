@@ -39,7 +39,7 @@
         <div class="c-region-grid">
           <div class="row g-0 justify-content-center">
           <!-- 新北市 -->
-          <div class="col-6">
+          <div class="col-12">
             <a href="#"
                class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
                data-category="newtaipei">
@@ -66,23 +66,25 @@
               @if(isset($newtaipeiAds) && $newtaipeiAds->count() > 0)
                 @foreach($newtaipeiAds as $ad)
                 <div class="col-6 col-md-4">
-                  <div class="c-ad-card c-ad-card--featured">
-                    <div class="c-ad-card__media">
-                      <img
-                        src="{{ $ad->image ? asset('storage/' . $ad->image) : asset('img/105340821.jpg') }}"
-                        alt="{{ $ad->name ?? '廣告圖片' }}"
-                        class="c-ad-card__img"
-                      >
+                  <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="text-decoration-none">
+                    <div class="c-ad-card c-ad-card--featured">
+                      <div class="c-ad-card__media">
+                        <img
+                          src="{{ $ad->image ? asset('storage/' . $ad->image) : asset('img/105340821.jpg') }}"
+                          alt="{{ $ad->name ?? '廣告圖片' }}"
+                          class="c-ad-card__img"
+                        >
+                      </div>
+                      <div class="c-ad-card__content">
+                        <p class="c-ad-card__text">
+                          {{ $ad->description ?? $ad->subtitle ?? '小額借款，臨時周轉，免押證件，息低保密，手續簡便，借錢不求人，還款好輕鬆。' }}
+                        </p>
+                      </div>
+                      <div class="c-ad-card__link">
+                        {{ $ad->name ?? $ad->subtitle ?? '查看詳情' }}
+                      </div>
                     </div>
-                    <div class="c-ad-card__content">
-                      <p class="c-ad-card__text">
-                        {{ $ad->description ?? $ad->subtitle ?? '小額借款，臨時周轉，免押證件，息低保密，手續簡便，借錢不求人，還款好輕鬆。' }}
-                      </p>
-                    </div>
-                    <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="c-ad-card__link">
-                      {{ $ad->name ?? $ad->subtitle ?? '查看詳情' }}
-                    </a>
-                  </div>
+                  </a>
                 </div>
                 @endforeach
               @else

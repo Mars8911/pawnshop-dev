@@ -34,27 +34,26 @@
         </div>
       </div>
 
-      <!-- 大區塊：台北借錢、新北借錢（兩個大格） -->
+      <!-- 大區塊：高雄、屏東類別 -->
       <section class="mb-3">
         <div class="c-region-grid">
           <div class="row g-0 justify-content-center">
-          <!-- 基隆 -->
+          <!-- 高雄 -->
           <div class="col-6">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--keelung category-tab {{ (isset($keelungCategory) && isset($category) && $category->id == $keelungCategory->id) ? 'region-block--active' : '' }}"
-               data-category="keelung"
-               onclick="event.preventDefault(); switchCategory('keelung');">
-              <div class="region-title">基隆</div>
+               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               data-category="kaohsiung"
+               onclick="event.preventDefault(); switchCategory('kaohsiung');">
+              <div class="region-title">高雄</div>
             </a>
           </div>
-
-          <!-- 台北 -->
+          <!-- 屏東 -->
           <div class="col-6">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($taipeiCategory) && isset($category) && $category->id == $taipeiCategory->id) ? 'region-block--active' : '' }}"
-               data-category="taipei"
-               onclick="event.preventDefault(); switchCategory('taipei');">
-              <div class="region-title">台北</div>
+               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               data-category="pingtung"
+               onclick="event.preventDefault(); switchCategory('pingtung');">
+              <div class="region-title">屏東</div>
             </a>
           </div>
           </div>
@@ -71,11 +70,11 @@
       <!-- 下方廣告列 -->
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
-          <!-- 基隆類別廣告 -->
-          <div class="category-ads" id="ads-keelung" style="display: {{ (isset($keelungCategory) && isset($category) && $category->id == $keelungCategory->id) ? 'block' : 'none' }};">
+          <!-- 高雄類別廣告 -->
+          <div class="category-ads" id="ads-kaohsiung" style="display: block;">
             <div class="row g-3">
-              @if(isset($keelungAds) && $keelungAds->count() > 0)
-                @foreach($keelungAds as $ad)
+              @if(isset($kaohsiungAds) && $kaohsiungAds->count() > 0)
+                @foreach($kaohsiungAds as $ad)
                 <div class="col-6 col-md-4">
                   <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="text-decoration-none">
                     <div class="c-ad-card c-ad-card--featured">
@@ -106,11 +105,11 @@
             </div>
           </div>
 
-          <!-- 台北類別廣告 -->
-          <div class="category-ads" id="ads-taipei" style="display: {{ (isset($taipeiCategory) && isset($category) && $category->id == $taipeiCategory->id) ? 'block' : 'none' }};">
+          <!-- 屏東類別廣告 -->
+          <div class="category-ads" id="ads-pingtung" style="display: none;">
             <div class="row g-3">
-              @if(isset($taipeiAds) && $taipeiAds->count() > 0)
-                @foreach($taipeiAds as $ad)
+              @if(isset($pingtungAds) && $pingtungAds->count() > 0)
+                @foreach($pingtungAds as $ad)
                 <div class="col-6 col-md-4">
                   <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="text-decoration-none">
                     <div class="c-ad-card c-ad-card--featured">
@@ -235,21 +234,30 @@
       }
     }
 
-    // 頁面載入時，如果沒有預設顯示的類別，則顯示第一個有廣告的類別
+    // 頁面載入時，確保高雄始終是預設 active
     document.addEventListener('DOMContentLoaded', function() {
-      const keelungAds = document.getElementById('ads-keelung');
-      const taipeiAds = document.getElementById('ads-taipei');
+      // 確保高雄 tab 是 active
+      const kaohsiungTab = document.querySelector('.category-tab[data-category="kaohsiung"]');
+      if (kaohsiungTab) {
+        kaohsiungTab.classList.add('region-block--active');
+      }
 
-      // 檢查當前是否有顯示的廣告容器
-      const visibleContainer = document.querySelector('.category-ads[style*="block"]');
-
-      // 如果沒有顯示的容器，則顯示第一個有內容的類別
-      if (!visibleContainer) {
-        if (keelungAds && keelungAds.querySelector('.col-6')) {
-          switchCategory('keelung');
-        } else if (taipeiAds && taipeiAds.querySelector('.col-6')) {
-          switchCategory('taipei');
+      // 確保其他 tab 不是 active
+      document.querySelectorAll('.category-tab').forEach(function(tab) {
+        if (tab.getAttribute('data-category') !== 'kaohsiung') {
+          tab.classList.remove('region-block--active');
         }
+      });
+
+      // 確保高雄的廣告容器顯示，其他隱藏
+      const kaohsiungAds = document.getElementById('ads-kaohsiung');
+      const pingtungAds = document.getElementById('ads-pingtung');
+
+      if (kaohsiungAds) {
+        kaohsiungAds.style.display = 'block';
+      }
+      if (pingtungAds) {
+        pingtungAds.style.display = 'none';
       }
     });
   </script>
