@@ -34,27 +34,16 @@
         </div>
       </div>
 
-      <!-- 大區塊：台北借錢、新北借錢（兩個大格） -->
+      <!-- 大區塊：新北市類別 -->
       <section class="mb-3">
         <div class="c-region-grid">
           <div class="row g-0 justify-content-center">
-          <!-- 基隆 -->
+          <!-- 新北市 -->
           <div class="col-6">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--keelung category-tab {{ (isset($keelungCategory) && isset($category) && $category->id == $keelungCategory->id) ? 'region-block--active' : '' }}"
-               data-category="keelung"
-               onclick="event.preventDefault(); switchCategory('keelung');">
-              <div class="region-title">基隆</div>
-            </a>
-          </div>
-
-          <!-- 台北 -->
-          <div class="col-6">
-            <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($taipeiCategory) && isset($category) && $category->id == $taipeiCategory->id) ? 'region-block--active' : '' }}"
-               data-category="taipei"
-               onclick="event.preventDefault(); switchCategory('taipei');">
-              <div class="region-title">台北</div>
+               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               data-category="newtaipei">
+              <div class="region-title">新北市</div>
             </a>
           </div>
           </div>
@@ -71,44 +60,11 @@
       <!-- 下方廣告列 -->
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
-          <!-- 基隆類別廣告 -->
-          <div class="category-ads" id="ads-keelung" style="display: {{ (isset($keelungCategory) && isset($category) && $category->id == $keelungCategory->id) ? 'block' : 'none' }};">
+          <!-- 新北市類別廣告 -->
+          <div class="category-ads" id="ads-newtaipei">
             <div class="row g-3">
-              @if(isset($keelungAds) && $keelungAds->count() > 0)
-                @foreach($keelungAds as $ad)
-                <div class="col-6 col-md-4">
-                  <div class="c-ad-card c-ad-card--featured">
-                    <div class="c-ad-card__media">
-                      <img
-                        src="{{ $ad->image ? asset('storage/' . $ad->image) : asset('img/105340821.jpg') }}"
-                        alt="{{ $ad->name ?? '廣告圖片' }}"
-                        class="c-ad-card__img"
-                      >
-                    </div>
-                    <div class="c-ad-card__content">
-                      <p class="c-ad-card__text">
-                        {{ $ad->description ?? $ad->subtitle ?? '小額借款，臨時周轉，免押證件，息低保密，手續簡便，借錢不求人，還款好輕鬆。' }}
-                      </p>
-                    </div>
-                    <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="c-ad-card__link">
-                      {{ $ad->name ?? $ad->subtitle ?? '查看詳情' }}
-                    </a>
-                  </div>
-                </div>
-                @endforeach
-              @else
-                <div class="col-12">
-                  <p class="text-center text-muted">尚無廣告刊登</p>
-                </div>
-              @endif
-            </div>
-          </div>
-
-          <!-- 台北類別廣告 -->
-          <div class="category-ads" id="ads-taipei" style="display: {{ (isset($taipeiCategory) && isset($category) && $category->id == $taipeiCategory->id) ? 'block' : 'none' }};">
-            <div class="row g-3">
-              @if(isset($taipeiAds) && $taipeiAds->count() > 0)
-                @foreach($taipeiAds as $ad)
+              @if(isset($newtaipeiAds) && $newtaipeiAds->count() > 0)
+                @foreach($newtaipeiAds as $ad)
                 <div class="col-6 col-md-4">
                   <div class="c-ad-card c-ad-card--featured">
                     <div class="c-ad-card__media">
@@ -206,48 +162,5 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function switchCategory(category) {
-      // 隱藏所有廣告容器
-      document.querySelectorAll('.category-ads').forEach(function(container) {
-        container.style.display = 'none';
-      });
-
-      // 移除所有 tab 的 active 狀態
-      document.querySelectorAll('.category-tab').forEach(function(tab) {
-        tab.classList.remove('region-block--active');
-      });
-
-      // 顯示選中的類別廣告
-      const adsContainer = document.getElementById('ads-' + category);
-      if (adsContainer) {
-        adsContainer.style.display = 'block';
-      }
-
-      // 添加選中 tab 的 active 狀態
-      const activeTab = document.querySelector('.category-tab[data-category="' + category + '"]');
-      if (activeTab) {
-        activeTab.classList.add('region-block--active');
-      }
-    }
-
-    // 頁面載入時，如果沒有預設顯示的類別，則顯示第一個有廣告的類別
-    document.addEventListener('DOMContentLoaded', function() {
-      const keelungAds = document.getElementById('ads-keelung');
-      const taipeiAds = document.getElementById('ads-taipei');
-
-      // 檢查當前是否有顯示的廣告容器
-      const visibleContainer = document.querySelector('.category-ads[style*="block"]');
-
-      // 如果沒有顯示的容器，則顯示第一個有內容的類別
-      if (!visibleContainer) {
-        if (keelungAds && keelungAds.querySelector('.col-6')) {
-          switchCategory('keelung');
-        } else if (taipeiAds && taipeiAds.querySelector('.col-6')) {
-          switchCategory('taipei');
-        }
-      }
-    });
-  </script>
 </body>
 </html>
