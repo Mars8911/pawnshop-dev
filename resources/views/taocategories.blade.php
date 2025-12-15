@@ -41,7 +41,7 @@
           <!-- 桃園 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($taoyuanCategory) && isset($category) && $category->id == $taoyuanCategory->id) ? 'region-block--active' : '' }}"
                data-category="taoyuan"
                onclick="event.preventDefault(); switchCategory('taoyuan');">
               <div class="region-title">桃園</div>
@@ -50,7 +50,7 @@
           <!-- 新竹 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($hsinchuCategory) && isset($category) && $category->id == $hsinchuCategory->id) ? 'region-block--active' : '' }}"
                data-category="hsinchu"
                onclick="event.preventDefault(); switchCategory('hsinchu');">
               <div class="region-title">新竹</div>
@@ -59,7 +59,7 @@
           <!-- 苗栗 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($miaoliCategory) && isset($category) && $category->id == $miaoliCategory->id) ? 'region-block--active' : '' }}"
                data-category="miaoli"
                onclick="event.preventDefault(); switchCategory('miaoli');">
               <div class="region-title">苗栗</div>
@@ -80,7 +80,7 @@
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
           <!-- 桃園類別廣告 -->
-          <div class="category-ads" id="ads-taoyuan" style="display: block;">
+          <div class="category-ads" id="ads-taoyuan" style="display: {{ (isset($taoyuanCategory) && isset($category) && $category->id == $taoyuanCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($taoyuanAds) && $taoyuanAds->count() > 0)
                 @foreach($taoyuanAds as $ad)
@@ -115,7 +115,7 @@
           </div>
 
           <!-- 新竹類別廣告 -->
-          <div class="category-ads" id="ads-hsinchu" style="display: none;">
+          <div class="category-ads" id="ads-hsinchu" style="display: {{ (isset($hsinchuCategory) && isset($category) && $category->id == $hsinchuCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($hsinchuAds) && $hsinchuAds->count() > 0)
                 @foreach($hsinchuAds as $ad)
@@ -150,7 +150,7 @@
           </div>
 
           <!-- 苗栗類別廣告 -->
-          <div class="category-ads" id="ads-miaoli" style="display: none;">
+          <div class="category-ads" id="ads-miaoli" style="display: {{ (isset($miaoliCategory) && isset($category) && $category->id == $miaoliCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($miaoliAds) && $miaoliAds->count() > 0)
                 @foreach($miaoliAds as $ad)
@@ -217,37 +217,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>

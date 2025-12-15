@@ -277,20 +277,20 @@
               </h3>
               <div class="c-about-section__content">
                 <p>
-                  Tw97台灣借錢網於2014年9月7日正式上線營運,服務網址為Tw97.net。本網站以<span class="c-about-section__highlight">專業</span>、<span class="c-about-section__highlight">優質</span>、<span class="c-about-section__highlight">創新</span>的服務理念,致力成為<span class="c-about-section__highlight">台灣最大借錢資訊平台</span>,為借貸業者增加曝光量、建立品牌形象、吸引更多借錢客源。
+                6957tw.台灣借錢網於2014年9月7日正式上線營運,服務網址為Tw97.net。本網站以<span class="c-about-section__highlight">專業</span>、<span class="c-about-section__highlight">優質</span>、<span class="c-about-section__highlight">創新</span>的服務理念,致力成為<span class="c-about-section__highlight">台灣最大借錢資訊平台</span>,為借貸業者增加曝光量、建立品牌形象、吸引更多借錢客源。
                 </p>
               </div>
             </div>
 
             <!-- 站名緣由 -->
-            <div class="c-about-section">
+            <div id="anchor-about-name" class="c-about-section">
               <h3 class="c-about-section__title">
                 <span class="c-about-section__bar"></span>
                 站名緣由
               </h3>
               <div class="c-about-section__content">
-                <p>因為國語諧音「<span class="c-about-section__highlight">救急</span> =97」</p>
-                <p>而且台語諧音「<span class="c-about-section__highlight">借錢</span> =97」</p>
+                <p>因為國語諧音「<span class="c-about-section__highlight">「來救我急」</span> = 6957</p>
+                <p>而且台語諧音「<span class="c-about-section__highlight">「來借有錢」  </span> = 6957</p>
                 <p>所以當有人急需借錢救急時,就會馬上聯想到「台灣借錢網」,成為借錢資訊的第一品牌。</p>
               </div>
             </div>
@@ -332,43 +332,35 @@
       </div>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    // 處理底部導航連結的點擊事件
+    function handleBottomNavClick(event, contentId, targetId) {
+      // 檢查當前是否在 ad-label 頁面
+      const currentPath = window.location.pathname;
+      const isAdLabelPage = currentPath.includes('/ad-label');
+
+      if (isAdLabelPage && typeof switchContent === 'function') {
+        // 如果在 ad-label 頁面，阻止預設跳轉並切換內容
+        event.preventDefault();
+        switchContent(contentId);
+
+        // 滾動到目標元素
+        setTimeout(function() {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      }
+      // 如果不在 ad-label 頁面，允許預設跳轉（會導航到帶參數的 URL）
+    }
+
     function switchContent(contentId) {
       // 隱藏所有內容面板
       document.querySelectorAll('.c-content-panel').forEach(function(panel) {
@@ -404,9 +396,39 @@
       }
     }
 
-    // 頁面載入時，確保「廣告刊登」是預設顯示
+    // 根據 URL 參數切換內容並滾動
+    function initContentFromUrl() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const section = urlParams.get('section');
+
+      // 定義對應的目標元素 ID
+      const sectionMap = {
+        'about': 'anchor-about-name',
+        'disclaimer': 'content-disclaimer',
+        'alliance': 'content-alliance',
+        'advertise': 'content-advertise'
+      };
+
+      if (section && sectionMap[section]) {
+        // 切換到對應的內容面板
+        switchContent(section);
+
+        // 滾動到目標元素
+        setTimeout(function() {
+          const targetElement = document.getElementById(sectionMap[section]);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 300);
+      } else {
+        // 沒有參數時，預設顯示「廣告刊登」
+        switchContent('advertise');
+      }
+    }
+
+    // 頁面載入時初始化
     document.addEventListener('DOMContentLoaded', function() {
-      switchContent('advertise');
+      initContentFromUrl();
     });
   </script>
 </body>

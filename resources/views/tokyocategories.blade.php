@@ -41,7 +41,7 @@
           <!-- 宜蘭 -->
           <div class="col-3">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($yilanCategory) && isset($category) && $category->id == $yilanCategory->id) ? 'region-block--active' : '' }}"
                data-category="yilan"
                onclick="event.preventDefault(); switchCategory('yilan');">
               <div class="region-title">宜蘭</div>
@@ -50,7 +50,7 @@
           <!-- 花蓮 -->
           <div class="col-3">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($hualienCategory) && isset($category) && $category->id == $hualienCategory->id) ? 'region-block--active' : '' }}"
                data-category="hualien"
                onclick="event.preventDefault(); switchCategory('hualien');">
               <div class="region-title">花蓮</div>
@@ -59,7 +59,7 @@
           <!-- 台東 -->
           <div class="col-3">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($taitungCategory) && isset($category) && $category->id == $taitungCategory->id) ? 'region-block--active' : '' }}"
                data-category="taitung"
                onclick="event.preventDefault(); switchCategory('taitung');">
               <div class="region-title">台東</div>
@@ -68,7 +68,7 @@
           <!-- 離島 -->
           <div class="col-3">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($offshoreCategory) && isset($category) && $category->id == $offshoreCategory->id) ? 'region-block--active' : '' }}"
                data-category="offshore"
                onclick="event.preventDefault(); switchCategory('offshore');">
               <div class="region-title">離島</div>
@@ -89,7 +89,7 @@
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
           <!-- 宜蘭類別廣告 -->
-          <div class="category-ads" id="ads-yilan" style="display: block;">
+          <div class="category-ads" id="ads-yilan" style="display: {{ (isset($yilanCategory) && isset($category) && $category->id == $yilanCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($yilanAds) && $yilanAds->count() > 0)
                 @foreach($yilanAds as $ad)
@@ -124,7 +124,7 @@
           </div>
 
           <!-- 花蓮類別廣告 -->
-          <div class="category-ads" id="ads-hualien" style="display: none;">
+          <div class="category-ads" id="ads-hualien" style="display: {{ (isset($hualienCategory) && isset($category) && $category->id == $hualienCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($hualienAds) && $hualienAds->count() > 0)
                 @foreach($hualienAds as $ad)
@@ -159,7 +159,7 @@
           </div>
 
           <!-- 台東類別廣告 -->
-          <div class="category-ads" id="ads-taitung" style="display: none;">
+          <div class="category-ads" id="ads-taitung" style="display: {{ (isset($taitungCategory) && isset($category) && $category->id == $taitungCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($taitungAds) && $taitungAds->count() > 0)
                 @foreach($taitungAds as $ad)
@@ -194,7 +194,7 @@
           </div>
 
           <!-- 離島類別廣告 -->
-          <div class="category-ads" id="ads-offshore" style="display: none;">
+          <div class="category-ads" id="ads-offshore" style="display: {{ (isset($offshoreCategory) && isset($category) && $category->id == $offshoreCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($offshoreAds) && $offshoreAds->count() > 0)
                 @foreach($offshoreAds as $ad)
@@ -261,37 +261,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>
@@ -322,38 +292,27 @@
       }
     }
 
-    // 頁面載入時，確保宜蘭始終是預設 active
+    // 頁面載入時，如果沒有預設顯示的類別，則顯示第一個有廣告的類別
     document.addEventListener('DOMContentLoaded', function() {
-      // 確保宜蘭 tab 是 active
-      const yilanTab = document.querySelector('.category-tab[data-category="yilan"]');
-      if (yilanTab) {
-        yilanTab.classList.add('region-block--active');
-      }
-
-      // 確保其他 tab 不是 active
-      document.querySelectorAll('.category-tab').forEach(function(tab) {
-        if (tab.getAttribute('data-category') !== 'yilan') {
-          tab.classList.remove('region-block--active');
-        }
-      });
-
-      // 確保宜蘭的廣告容器顯示，其他隱藏
       const yilanAds = document.getElementById('ads-yilan');
       const hualienAds = document.getElementById('ads-hualien');
       const taitungAds = document.getElementById('ads-taitung');
       const offshoreAds = document.getElementById('ads-offshore');
 
-      if (yilanAds) {
-        yilanAds.style.display = 'block';
-      }
-      if (hualienAds) {
-        hualienAds.style.display = 'none';
-      }
-      if (taitungAds) {
-        taitungAds.style.display = 'none';
-      }
-      if (offshoreAds) {
-        offshoreAds.style.display = 'none';
+      // 檢查當前是否有顯示的廣告容器
+      const visibleContainer = document.querySelector('.category-ads[style*="block"]');
+
+      // 如果沒有顯示的容器，則顯示第一個有內容的類別
+      if (!visibleContainer) {
+        if (yilanAds && yilanAds.querySelector('.col-6')) {
+          switchCategory('yilan');
+        } else if (hualienAds && hualienAds.querySelector('.col-6')) {
+          switchCategory('hualien');
+        } else if (taitungAds && taitungAds.querySelector('.col-6')) {
+          switchCategory('taitung');
+        } else if (offshoreAds && offshoreAds.querySelector('.col-6')) {
+          switchCategory('offshore');
+        }
       }
     });
   </script>

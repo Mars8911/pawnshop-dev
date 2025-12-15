@@ -309,6 +309,14 @@
     }
   }
 
+  // 小 nav 目前所在城市：active 紅底
+  &__link--active {
+    background-color: $danger;
+    color: $white;
+    padding: 0.125rem 0.5rem;
+    border-radius: $border-radius-sm;
+  }
+
   &__dot {
     color: $gray-500;
     font-size: 0.9375rem;
@@ -553,6 +561,12 @@
     background-color: #666;
     color: #FFC600;
   }
+}
+
+// 小城市按鈕：active 紅底
+.city-block--active {
+  background-color: $danger;
+  color: $white;
 }
 
 // === Section: 下方廣告列 ===

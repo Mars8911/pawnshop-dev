@@ -63,6 +63,9 @@
         ->orWhere('name', 'like', '%高屏區%')
         ->orWhere('name', 'like', '%高屏%')
         ->first();
+
+    // 目前所在分類（如果是在 /category/{id} 頁面）
+    $currentCategoryId = request()->routeIs('category.show') ? (int) request()->route('id') : null;
   @endphp
   <main class="py-3">
     <div class="container-fluid">
@@ -142,11 +145,24 @@
       <section class="mb-4 c-city-grid">
         <div class="row g-0 city-row">
           @forelse($categories as $category)
-            @if(stripos($category->name, '新北市') !== false || stripos($category->name, '台北市') !== false || stripos($category->name, '台北') !== false || stripos($category->name, '桃園') !== false || stripos($category->name, '台中') !== false || stripos($category->name, '高雄') !== false)
+            @if(
+              stripos($category->name, '新北市') !== false ||
+              stripos($category->name, '台北市') !== false ||
+              stripos($category->name, '台北') !== false ||
+              stripos($category->name, '桃園') !== false ||
+              stripos($category->name, '台中') !== false ||
+              stripos($category->name, '台南') !== false ||
+              stripos($category->name, '高雄') !== false
+            )
               @continue
             @endif
             <div class="col-4 col-md-2">
-              <a href="{{ route('category.show', $category->id) }}" class="city-block">{{ $category->name }}</a>
+              <a
+                href="{{ route('category.show', $category->id) }}"
+                class="city-block {{ isset($currentCategoryId) && $currentCategoryId === $category->id ? 'city-block--active' : '' }}"
+              >
+                {{ $category->name }}
+              </a>
             </div>
           @empty
             <div class="col-12">
@@ -228,37 +244,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>

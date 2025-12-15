@@ -34,77 +34,131 @@
         $yilanCategory     = \App\Models\Category::where('name', 'like', '%宜蘭%')->first();
         $hualienCategory   = \App\Models\Category::where('name', 'like', '%花蓮%')->first();
         $taitungCategory   = \App\Models\Category::where('name', 'like', '%台東%')->first();
+
+        // 目前這則廣告所屬的分類（用來在小 nav 上標示 active 紅底）
+        $currentCategoryId = $ad->category_id ?? null;
     @endphp
     <!-- 小nav -->
     <nav class="c-small-nav">
         <div class="c-small-nav__container">
             <ul class="c-small-nav__list">
                 <li class="c-small-nav__item">
-                    <a href="{{ $keelungCategory ? route('category.show', $keelungCategory->id) : '#' }}" class="c-small-nav__link">基隆</a>
+                    <a
+                      href="{{ $keelungCategory ? route('category.show', $keelungCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $keelungCategory) && $currentCategoryId === $keelungCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >基隆</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $taipeiCategory ? route('category.show', $taipeiCategory->id) : '#' }}" class="c-small-nav__link">台北</a>
+                    <a
+                      href="{{ $taipeiCategory ? route('category.show', $taipeiCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $taipeiCategory) && $currentCategoryId === $taipeiCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >台北</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $newtaipeiCategory ? route('category.show', $newtaipeiCategory->id) : '#' }}" class="c-small-nav__link">新北</a>
+                    <a
+                      href="{{ $newtaipeiCategory ? route('category.show', $newtaipeiCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $newtaipeiCategory) && $currentCategoryId === $newtaipeiCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >新北</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $taoyuanCategory ? route('category.show', $taoyuanCategory->id) : '#' }}" class="c-small-nav__link">桃園</a>
+                    <a
+                      href="{{ $taoyuanCategory ? route('category.show', $taoyuanCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $taoyuanCategory) && $currentCategoryId === $taoyuanCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >桃園</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $hsinchuCategory ? route('category.show', $hsinchuCategory->id) : '#' }}" class="c-small-nav__link">新竹</a>
+                    <a
+                      href="{{ $hsinchuCategory ? route('category.show', $hsinchuCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $hsinchuCategory) && $currentCategoryId === $hsinchuCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >新竹</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $miaoliCategory ? route('category.show', $miaoliCategory->id) : '#' }}" class="c-small-nav__link">苗栗</a>
+                    <a
+                      href="{{ $miaoliCategory ? route('category.show', $miaoliCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $miaoliCategory) && $currentCategoryId === $miaoliCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >苗栗</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $taichungCategory ? route('category.show', $taichungCategory->id) : '#' }}" class="c-small-nav__link">台中</a>
+                    <a
+                      href="{{ $taichungCategory ? route('category.show', $taichungCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $taichungCategory) && $currentCategoryId === $taichungCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >台中</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $changhuaCategory ? route('category.show', $changhuaCategory->id) : '#' }}" class="c-small-nav__link">彰化</a>
+                    <a
+                      href="{{ $changhuaCategory ? route('category.show', $changhuaCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $changhuaCategory) && $currentCategoryId === $changhuaCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >彰化</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $nantouCategory ? route('category.show', $nantouCategory->id) : '#' }}" class="c-small-nav__link">南投</a>
+                    <a
+                      href="{{ $nantouCategory ? route('category.show', $nantouCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $nantouCategory) && $currentCategoryId === $nantouCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >南投</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $yunlinCategory ? route('category.show', $yunlinCategory->id) : '#' }}" class="c-small-nav__link">雲林</a>
+                    <a
+                      href="{{ $yunlinCategory ? route('category.show', $yunlinCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $yunlinCategory) && $currentCategoryId === $yunlinCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >雲林</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $chiayiCategory ? route('category.show', $chiayiCategory->id) : '#' }}" class="c-small-nav__link">嘉義</a>
+                    <a
+                      href="{{ $chiayiCategory ? route('category.show', $chiayiCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $chiayiCategory) && $currentCategoryId === $chiayiCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >嘉義</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $tainanCategory ? route('category.show', $tainanCategory->id) : '#' }}" class="c-small-nav__link">台南</a>
+                    <a
+                      href="{{ $tainanCategory ? route('category.show', $tainanCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $tainanCategory) && $currentCategoryId === $tainanCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >台南</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $kaohsiungCategory ? route('category.show', $kaohsiungCategory->id) : '#' }}" class="c-small-nav__link">高雄</a>
+                    <a
+                      href="{{ $kaohsiungCategory ? route('category.show', $kaohsiungCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $kaohsiungCategory) && $currentCategoryId === $kaohsiungCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >高雄</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $pingtungCategory ? route('category.show', $pingtungCategory->id) : '#' }}" class="c-small-nav__link">屏東</a>
+                    <a
+                      href="{{ $pingtungCategory ? route('category.show', $pingtungCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $pingtungCategory) && $currentCategoryId === $pingtungCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >屏東</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $yilanCategory ? route('category.show', $yilanCategory->id) : '#' }}" class="c-small-nav__link">宜蘭</a>
+                    <a
+                      href="{{ $yilanCategory ? route('category.show', $yilanCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $yilanCategory) && $currentCategoryId === $yilanCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >宜蘭</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $hualienCategory ? route('category.show', $hualienCategory->id) : '#' }}" class="c-small-nav__link">花蓮</a>
+                    <a
+                      href="{{ $hualienCategory ? route('category.show', $hualienCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $hualienCategory) && $currentCategoryId === $hualienCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >花蓮</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="{{ $taitungCategory ? route('category.show', $taitungCategory->id) : '#' }}" class="c-small-nav__link">台東</a>
+                    <a
+                      href="{{ $taitungCategory ? route('category.show', $taitungCategory->id) : '#' }}"
+                      class="c-small-nav__link {{ isset($currentCategoryId, $taitungCategory) && $currentCategoryId === $taitungCategory->id ? 'c-small-nav__link--active' : '' }}"
+                    >台東</a>
                 </li>
             </ul>
         </div>
@@ -224,37 +278,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <style>

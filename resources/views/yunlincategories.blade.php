@@ -34,14 +34,14 @@
         </div>
       </div>
 
-      <!-- 大區塊：雲林、嘉義、南投類別 -->
+      <!-- 大區塊：雲林、嘉義、台南類別（雲嘉南） -->
       <section class="mb-3">
         <div class="c-region-grid">
           <div class="row g-0 justify-content-center">
           <!-- 雲林 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($yunlinCategory) && isset($category) && $category->id == $yunlinCategory->id) ? 'region-block--active' : '' }}"
                data-category="yunlin"
                onclick="event.preventDefault(); switchCategory('yunlin');">
               <div class="region-title">雲林</div>
@@ -50,19 +50,19 @@
           <!-- 嘉義 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($chiayiCategory) && isset($category) && $category->id == $chiayiCategory->id) ? 'region-block--active' : '' }}"
                data-category="chiayi"
                onclick="event.preventDefault(); switchCategory('chiayi');">
               <div class="region-title">嘉義</div>
             </a>
           </div>
-          <!-- 南投 -->
+          <!-- 台南 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
-               data-category="nantou"
-               onclick="event.preventDefault(); switchCategory('nantou');">
-              <div class="region-title">南投</div>
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($tainanCategory) && isset($category) && $category->id == $tainanCategory->id) ? 'region-block--active' : '' }}"
+               data-category="tainan"
+               onclick="event.preventDefault(); switchCategory('tainan');">
+              <div class="region-title">台南</div>
             </a>
           </div>
           </div>
@@ -80,7 +80,7 @@
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
           <!-- 雲林類別廣告 -->
-          <div class="category-ads" id="ads-yunlin" style="display: block;">
+          <div class="category-ads" id="ads-yunlin" style="display: {{ (isset($yunlinCategory) && isset($category) && $category->id == $yunlinCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($yunlinAds) && $yunlinAds->count() > 0)
                 @foreach($yunlinAds as $ad)
@@ -115,7 +115,7 @@
           </div>
 
           <!-- 嘉義類別廣告 -->
-          <div class="category-ads" id="ads-chiayi" style="display: none;">
+          <div class="category-ads" id="ads-chiayi" style="display: {{ (isset($chiayiCategory) && isset($category) && $category->id == $chiayiCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($chiayiAds) && $chiayiAds->count() > 0)
                 @foreach($chiayiAds as $ad)
@@ -149,11 +149,11 @@
             </div>
           </div>
 
-          <!-- 南投類別廣告 -->
-          <div class="category-ads" id="ads-nantou" style="display: none;">
+          <!-- 台南類別廣告 -->
+          <div class="category-ads" id="ads-tainan" style="display: {{ (isset($tainanCategory) && isset($category) && $category->id == $tainanCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
-              @if(isset($nantouAds) && $nantouAds->count() > 0)
-                @foreach($nantouAds as $ad)
+              @if(isset($tainanAds) && $tainanAds->count() > 0)
+                @foreach($tainanAds as $ad)
                 <div class="col-6 col-md-4">
                   <a href="{{ route('ad.page', ['id' => $ad->id]) }}" class="text-decoration-none">
                     <div class="c-ad-card c-ad-card--featured">
@@ -183,6 +183,7 @@
               @endif
             </div>
           </div>
+
         </div>
       </section>
 
@@ -217,37 +218,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>
@@ -278,34 +249,24 @@
       }
     }
 
-    // 頁面載入時，確保雲林始終是預設 active
+    // 頁面載入時，如果沒有預設顯示的類別，則顯示第一個有廣告的類別
     document.addEventListener('DOMContentLoaded', function() {
-      // 確保雲林 tab 是 active
-      const yunlinTab = document.querySelector('.category-tab[data-category="yunlin"]');
-      if (yunlinTab) {
-        yunlinTab.classList.add('region-block--active');
-      }
-
-      // 確保其他 tab 不是 active
-      document.querySelectorAll('.category-tab').forEach(function(tab) {
-        if (tab.getAttribute('data-category') !== 'yunlin') {
-          tab.classList.remove('region-block--active');
-        }
-      });
-
-      // 確保雲林的廣告容器顯示，其他隱藏
       const yunlinAds = document.getElementById('ads-yunlin');
       const chiayiAds = document.getElementById('ads-chiayi');
-      const nantouAds = document.getElementById('ads-nantou');
+      const tainanAds = document.getElementById('ads-tainan');
 
-      if (yunlinAds) {
-        yunlinAds.style.display = 'block';
-      }
-      if (chiayiAds) {
-        chiayiAds.style.display = 'none';
-      }
-      if (nantouAds) {
-        nantouAds.style.display = 'none';
+      // 檢查當前是否有顯示的廣告容器
+      const visibleContainer = document.querySelector('.category-ads[style*="block"]');
+
+      // 如果沒有顯示的容器，則顯示第一個有內容的類別
+      if (!visibleContainer) {
+        if (yunlinAds && yunlinAds.querySelector('.col-6')) {
+          switchCategory('yunlin');
+        } else if (chiayiAds && chiayiAds.querySelector('.col-6')) {
+          switchCategory('chiayi');
+        } else if (tainanAds && tainanAds.querySelector('.col-6')) {
+          switchCategory('tainan');
+        }
       }
     });
   </script>

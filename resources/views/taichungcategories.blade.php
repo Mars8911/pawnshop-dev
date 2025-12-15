@@ -41,7 +41,7 @@
           <!-- 台中 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($taichungCategory) && isset($category) && $category->id == $taichungCategory->id) ? 'region-block--active' : '' }}"
                data-category="taichung"
                onclick="event.preventDefault(); switchCategory('taichung');">
               <div class="region-title">台中</div>
@@ -50,7 +50,7 @@
           <!-- 彰化 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($changhuaCategory) && isset($category) && $category->id == $changhuaCategory->id) ? 'region-block--active' : '' }}"
                data-category="changhua"
                onclick="event.preventDefault(); switchCategory('changhua');">
               <div class="region-title">彰化</div>
@@ -59,7 +59,7 @@
           <!-- 南投 -->
           <div class="col-4">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($nantouCategory) && isset($category) && $category->id == $nantouCategory->id) ? 'region-block--active' : '' }}"
                data-category="nantou"
                onclick="event.preventDefault(); switchCategory('nantou');">
               <div class="region-title">南投</div>
@@ -80,7 +80,7 @@
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
           <!-- 台中類別廣告 -->
-          <div class="category-ads" id="ads-taichung" style="display: block;">
+          <div class="category-ads" id="ads-taichung" style="display: {{ (isset($taichungCategory) && isset($category) && $category->id == $taichungCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($taichungAds) && $taichungAds->count() > 0)
                 @foreach($taichungAds as $ad)
@@ -115,7 +115,7 @@
           </div>
 
           <!-- 彰化類別廣告 -->
-          <div class="category-ads" id="ads-changhua" style="display: none;">
+          <div class="category-ads" id="ads-changhua" style="display: {{ (isset($changhuaCategory) && isset($category) && $category->id == $changhuaCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($changhuaAds) && $changhuaAds->count() > 0)
                 @foreach($changhuaAds as $ad)
@@ -150,7 +150,7 @@
           </div>
 
           <!-- 南投類別廣告 -->
-          <div class="category-ads" id="ads-nantou" style="display: none;">
+          <div class="category-ads" id="ads-nantou" style="display: {{ (isset($nantouCategory) && isset($category) && $category->id == $nantouCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($nantouAds) && $nantouAds->count() > 0)
                 @foreach($nantouAds as $ad)
@@ -217,37 +217,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>
@@ -278,34 +248,24 @@
       }
     }
 
-    // 頁面載入時，確保台中始終是預設 active
+    // 頁面載入時，如果沒有預設顯示的類別，則顯示第一個有廣告的類別
     document.addEventListener('DOMContentLoaded', function() {
-      // 確保台中 tab 是 active
-      const taichungTab = document.querySelector('.category-tab[data-category="taichung"]');
-      if (taichungTab) {
-        taichungTab.classList.add('region-block--active');
-      }
-
-      // 確保其他 tab 不是 active
-      document.querySelectorAll('.category-tab').forEach(function(tab) {
-        if (tab.getAttribute('data-category') !== 'taichung') {
-          tab.classList.remove('region-block--active');
-        }
-      });
-
-      // 確保台中的廣告容器顯示，其他隱藏
       const taichungAds = document.getElementById('ads-taichung');
       const changhuaAds = document.getElementById('ads-changhua');
       const nantouAds = document.getElementById('ads-nantou');
 
-      if (taichungAds) {
-        taichungAds.style.display = 'block';
-      }
-      if (changhuaAds) {
-        changhuaAds.style.display = 'none';
-      }
-      if (nantouAds) {
-        nantouAds.style.display = 'none';
+      // 檢查當前是否有顯示的廣告容器
+      const visibleContainer = document.querySelector('.category-ads[style*="block"]');
+
+      // 如果沒有顯示的容器，則顯示第一個有內容的類別
+      if (!visibleContainer) {
+        if (taichungAds && taichungAds.querySelector('.col-6')) {
+          switchCategory('taichung');
+        } else if (changhuaAds && changhuaAds.querySelector('.col-6')) {
+          switchCategory('changhua');
+        } else if (nantouAds && nantouAds.querySelector('.col-6')) {
+          switchCategory('nantou');
+        }
       }
     });
   </script>

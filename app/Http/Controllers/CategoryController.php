@@ -86,13 +86,13 @@ class CategoryController extends Controller
             return view('taocategories', compact('category', 'taoyuanCategory', 'hsinchuCategory', 'miaoliCategory', 'taoyuanAds', 'hsinchuAds', 'miaoliAds'));
         }
 
-        // 如果是雲林、嘉義、南投相關類別，使用 yunlincategories 視圖
+        // 如果是雲林、嘉義、台南相關類別（雲嘉南），使用 yunlincategories 視圖
         if (stripos($category->name, '雲林') !== false ||
             stripos($category->name, '嘉義') !== false ||
-            stripos($category->name, '南投') !== false ||
+            stripos($category->name, '台南') !== false ||
             stripos($category->slug, 'yunlin') !== false ||
             stripos($category->slug, 'chiayi') !== false ||
-            stripos($category->slug, 'nantou') !== false) {
+            stripos($category->slug, 'tainan') !== false) {
 
             // 取得雲林類別
             $yunlinCategory = Category::where('name', '雲林')
@@ -104,9 +104,9 @@ class CategoryController extends Controller
                 ->orWhere('slug', 'chiayi')
                 ->first();
 
-            // 取得南投類別
-            $nantouCategory = Category::where('name', '南投')
-                ->orWhere('slug', 'nantou')
+            // 取得台南類別
+            $tainanCategory = Category::where('name', '台南')
+                ->orWhere('slug', 'tainan')
                 ->first();
 
             // 取得雲林類別下的所有啟用廣告
@@ -129,17 +129,17 @@ class CategoryController extends Controller
                     ->get();
             }
 
-            // 取得南投類別下的所有啟用廣告
-            $nantouAds = collect();
-            if ($nantouCategory) {
-                $nantouAds = Ad::where('category_id', $nantouCategory->id)
+            // 取得台南類別下的所有啟用廣告
+            $tainanAds = collect();
+            if ($tainanCategory) {
+                $tainanAds = Ad::where('category_id', $tainanCategory->id)
                     ->where('is_active', true)
                     ->orderBy('sort_order')
                     ->orderBy('created_at', 'desc')
                     ->get();
             }
 
-            return view('yunlincategories', compact('category', 'yunlinCategory', 'chiayiCategory', 'nantouCategory', 'yunlinAds', 'chiayiAds', 'nantouAds'));
+            return view('yunlincategories', compact('category', 'yunlinCategory', 'chiayiCategory', 'tainanCategory', 'yunlinAds', 'chiayiAds', 'tainanAds'));
         }
 
         // 如果是高雄、屏東相關類別，使用 highcategories 視圖

@@ -41,7 +41,7 @@
           <!-- 高雄 -->
           <div class="col-6">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab region-block--active"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($kaohsiungCategory) && isset($category) && $category->id == $kaohsiungCategory->id) ? 'region-block--active' : '' }}"
                data-category="kaohsiung"
                onclick="event.preventDefault(); switchCategory('kaohsiung');">
               <div class="region-title">高雄</div>
@@ -50,7 +50,7 @@
           <!-- 屏東 -->
           <div class="col-6">
             <a href="#"
-               class="text-center text-decoration-none region-block region-block--taipei category-tab"
+               class="text-center text-decoration-none region-block region-block--taipei category-tab {{ (isset($pingtungCategory) && isset($category) && $category->id == $pingtungCategory->id) ? 'region-block--active' : '' }}"
                data-category="pingtung"
                onclick="event.preventDefault(); switchCategory('pingtung');">
               <div class="region-title">屏東</div>
@@ -71,7 +71,7 @@
       <section class="mb-4 c-ad-strip">
         <div class="c-ad-strip__container">
           <!-- 高雄類別廣告 -->
-          <div class="category-ads" id="ads-kaohsiung" style="display: block;">
+          <div class="category-ads" id="ads-kaohsiung" style="display: {{ (isset($kaohsiungCategory) && isset($category) && $category->id == $kaohsiungCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($kaohsiungAds) && $kaohsiungAds->count() > 0)
                 @foreach($kaohsiungAds as $ad)
@@ -106,7 +106,7 @@
           </div>
 
           <!-- 屏東類別廣告 -->
-          <div class="category-ads" id="ads-pingtung" style="display: none;">
+          <div class="category-ads" id="ads-pingtung" style="display: {{ (isset($pingtungCategory) && isset($category) && $category->id == $pingtungCategory->id) ? 'block' : 'none' }};">
             <div class="row g-3">
               @if(isset($pingtungAds) && $pingtungAds->count() > 0)
                 @foreach($pingtungAds as $ad)
@@ -173,37 +173,7 @@
       </section>
 
       <!-- 下方訊息 -->
-      <section class="c-bottom-info">
-        <div class="c-bottom-info__container">
-          <!-- 導航連結 -->
-          <nav class="c-bottom-info__nav">
-            <a href="#" class="c-bottom-info__nav-link">關於本站</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">免責聲明</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">交換連結</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">廣告刊登</a>
-            <span class="c-bottom-info__nav-divider">|</span>
-            <a href="#" class="c-bottom-info__nav-link">看稿區</a>
-          </nav>
-
-          <!-- 橙色警告橫幅 -->
-          <div class="c-bottom-info__warning">
-            台灣借錢網 提醒您:借錢救急不要急,請勿依照他人指示操作ATM、或匯款、或交付個人存摺與提款卡,避免受騙!
-          </div>
-
-          <!-- 版權資訊 -->
-          <div class="c-bottom-info__copyright">
-            2014-2025 © Tw97 台灣借錢網-小額借款、融資借貸、快速借錢網! All Rights Reserved.
-          </div>
-
-          <!-- 公司名稱 -->
-          <div class="c-bottom-info__company">
-             6597tw.com 有限公司
-          </div>
-        </div>
-      </section>
+      @include('partials.bottom-info')
 
     </div>
   </main>
@@ -234,30 +204,21 @@
       }
     }
 
-    // 頁面載入時，確保高雄始終是預設 active
+    // 頁面載入時，如果沒有預設顯示的類別，則顯示第一個有廣告的類別
     document.addEventListener('DOMContentLoaded', function() {
-      // 確保高雄 tab 是 active
-      const kaohsiungTab = document.querySelector('.category-tab[data-category="kaohsiung"]');
-      if (kaohsiungTab) {
-        kaohsiungTab.classList.add('region-block--active');
-      }
-
-      // 確保其他 tab 不是 active
-      document.querySelectorAll('.category-tab').forEach(function(tab) {
-        if (tab.getAttribute('data-category') !== 'kaohsiung') {
-          tab.classList.remove('region-block--active');
-        }
-      });
-
-      // 確保高雄的廣告容器顯示，其他隱藏
       const kaohsiungAds = document.getElementById('ads-kaohsiung');
       const pingtungAds = document.getElementById('ads-pingtung');
 
-      if (kaohsiungAds) {
-        kaohsiungAds.style.display = 'block';
-      }
-      if (pingtungAds) {
-        pingtungAds.style.display = 'none';
+      // 檢查當前是否有顯示的廣告容器
+      const visibleContainer = document.querySelector('.category-ads[style*="block"]');
+
+      // 如果沒有顯示的容器，則顯示第一個有內容的類別
+      if (!visibleContainer) {
+        if (kaohsiungAds && kaohsiungAds.querySelector('.col-6')) {
+          switchCategory('kaohsiung');
+        } else if (pingtungAds && pingtungAds.querySelector('.col-6')) {
+          switchCategory('pingtung');
+        }
       }
     });
   </script>
