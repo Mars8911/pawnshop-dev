@@ -256,11 +256,13 @@ class CategoryController extends Controller
             return view('tokyocategories', compact('category', 'yilanCategory', 'hualienCategory', 'taitungCategory', 'offshoreCategory', 'yilanAds', 'hualienAds', 'taitungAds', 'offshoreAds'));
         }
 
-        // 如果是台中、彰化相關類別，使用 taichungcategories 視圖
+        // 如果是台中、彰化、南投相關類別，使用 taichungcategories 視圖
         if (stripos($category->name, '台中') !== false ||
             stripos($category->name, '彰化') !== false ||
+            stripos($category->name, '南投') !== false ||
             stripos($category->slug, 'taichung') !== false ||
-            stripos($category->slug, 'changhua') !== false) {
+            stripos($category->slug, 'changhua') !== false ||
+            stripos($category->slug, 'nantou') !== false) {
 
             // 取得台中類別
             $taichungCategory = Category::where('name', '台中')
