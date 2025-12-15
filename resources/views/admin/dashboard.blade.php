@@ -153,6 +153,13 @@
                         <p style="color: #666; font-size: 14px;">管理廣告內容、圖片與上架狀態</p>
                     </div>
                 </a>
+                <a href="{{ route('admin.alliance-ads') }}" style="text-decoration: none; color: inherit;">
+                    <div style="background: white; border: 2px solid #e0e0e0; border-radius: 12px; padding: 30px; text-align: center; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.borderColor='#007bff'; this.style.boxShadow='0 4px 12px rgba(0,123,255,0.2)'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none'">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🔗</div>
+                        <h3 style="color: #333; margin-bottom: 8px; font-size: 20px;">聯盟廣告管理</h3>
+                        <p style="color: #666; font-size: 14px;">管理聯盟網站的圖片與連結</p>
+                    </div>
+                </a>
             </div>
 
             <div class="info-box" style="margin-top: 40px;">

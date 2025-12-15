@@ -41,5 +41,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/ads/{id}/edit', [AdminController::class, 'editAd'])->name('ads.edit');
         Route::put('/ads/{id}', [AdminController::class, 'updateAd'])->name('ads.update');
         Route::delete('/ads/{id}', [AdminController::class, 'deleteAd'])->name('ads.delete');
+
+        // 聯盟廣告管理
+        Route::get('/alliance-ads', [AdminController::class, 'allianceAds'])->name('alliance-ads');
+        Route::get('/alliance-ads/create', [AdminController::class, 'createAllianceAd'])->name('alliance-ads.create');
+        Route::post('/alliance-ads', [AdminController::class, 'storeAllianceAd'])->name('alliance-ads.store');
+        Route::get('/alliance-ads/{id}/edit', [AdminController::class, 'editAllianceAd'])->name('alliance-ads.edit');
+        Route::put('/alliance-ads/{id}', [AdminController::class, 'updateAllianceAd'])->name('alliance-ads.update');
+        Route::delete('/alliance-ads/{id}', [AdminController::class, 'deleteAllianceAd'])->name('alliance-ads.delete');
     });
 });

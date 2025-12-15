@@ -57,44 +57,21 @@
             <h2 class="c-content-panel__title">聯盟網站</h2>
             <div class="c-content-panel__body">
               <div class="c-alliance-cards">
-                <!-- 卡片 1 -->
-                <div class="c-alliance-card">
-                  <a href="https://www.tw97.info/" target="_blank" rel="noopener noreferrer" class="c-alliance-card__link">
-                    <div class="c-alliance-card__image-wrapper">
-                      <img
-                        src="{{ asset('img/web01.png') }}"
-                        alt="台灣借錢資訊網"
-                        class="c-alliance-card__image"
-                      >
-                    </div>
-                  </a>
-                </div>
-
-                <!-- 卡片 2 -->
-                <div class="c-alliance-card">
-                  <a href="https://www.tw97.info/" target="_blank" rel="noopener noreferrer" class="c-alliance-card__link">
-                    <div class="c-alliance-card__image-wrapper">
-                      <img
-                        src="{{ asset('img/web01.png') }}"
-                        alt="台灣借錢資訊網"
-                        class="c-alliance-card__image"
-                      >
-                    </div>
-                  </a>
-                </div>
-
-                <!-- 卡片 3 -->
-                <div class="c-alliance-card">
-                  <a href="https://www.tw97.info/" target="_blank" rel="noopener noreferrer" class="c-alliance-card__link">
-                    <div class="c-alliance-card__image-wrapper">
-                      <img
-                        src="{{ asset('img/web01.png') }}"
-                        alt="台灣借錢資訊網"
-                        class="c-alliance-card__image"
-                      >
-                    </div>
-                  </a>
-                </div>
+                @forelse($allianceAds as $ad)
+                  <div class="c-alliance-card">
+                    <a href="{{ $ad->link }}" target="_blank" rel="noopener noreferrer" class="c-alliance-card__link">
+                      <div class="c-alliance-card__image-wrapper">
+                        <img
+                          src="{{ asset('storage/' . $ad->image) }}"
+                          alt="{{ $ad->alt ?? '聯盟網站' }}"
+                          class="c-alliance-card__image"
+                        >
+                      </div>
+                    </a>
+                  </div>
+                @empty
+                  <p style="text-align: center; color: #666; padding: 20px;">目前沒有聯盟廣告</p>
+                @endforelse
               </div>
             </div>
           </div>

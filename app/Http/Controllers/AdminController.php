@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use App\Models\Category;
 use App\Models\Ad;
+use App\Models\AllianceAd;
 
 class AdminController extends Controller
 {
@@ -276,6 +277,110 @@ class AdminController extends Controller
         $ad->delete();
 
         return redirect()->route('admin.ads')->with('success', '廣告已成功刪除！');
+    }
+
+    /**
+     * 顯示聯盟廣告管理頁面
+     */
+    public function allianceAds()
+    {
+        $allianceAds = AllianceAd::orderBy('sort_order')->orderBy('created_at', 'desc')->get();
+        return view('admin.alliance-ads', compact('allianceAds'));
+    }
+
+    /**
+     * 顯示新增聯盟廣告表單
+     */
+    public function createAllianceAd()
+    {
+        return view('admin.alliance-ad-form');
+    }
+
+    /**
+     * 儲存新聯盟廣告
+     */
+    public function storeAllianceAd(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link' => 'required|url|max:255',
+            'alt' => 'nullable|string|max:255',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $imagePath = $request->file('image')->store('alliance-ads', 'public');
+
+        AllianceAd::create([
+            'image' => $imagePath,
+            'link' => $request->link,
+            'alt' => $request->alt,
+            'sort_order' => $request->sort_order ?? 0,
+            'is_active' => $request->has('is_active'),
+        ]);
+
+        return redirect()->route('admin.alliance-ads')->with('success', '聯盟廣告已成功建立！');
+    }
+
+    /**
+     * 顯示編輯聯盟廣告表單
+     */
+    public function editAllianceAd($id)
+    {
+        $allianceAd = AllianceAd::findOrFail($id);
+        return view('admin.alliance-ad-form', compact('allianceAd'));
+    }
+
+    /**
+     * 更新聯盟廣告
+     */
+    public function updateAllianceAd(Request $request, $id)
+    {
+        $allianceAd = AllianceAd::findOrFail($id);
+
+        $request->validate([
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'link' => 'required|url|max:255',
+            'alt' => 'nullable|string|max:255',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $data = [
+            'link' => $request->link,
+            'alt' => $request->alt,
+            'sort_order' => $request->sort_order ?? 0,
+            'is_active' => $request->has('is_active'),
+        ];
+
+        if ($request->hasFile('image')) {
+            // 刪除舊圖片
+            if ($allianceAd->image) {
+                Storage::disk('public')->delete($allianceAd->image);
+            }
+            $data['image'] = $request->file('image')->store('alliance-ads', 'public');
+        }
+
+        $allianceAd->update($data);
+
+        return redirect()->route('admin.alliance-ads')->with('success', '聯盟廣告已成功更新！');
+    }
+
+    /**
+     * 刪除聯盟廣告
+     */
+    public function deleteAllianceAd($id)
+    {
+        $allianceAd = AllianceAd::findOrFail($id);
+
+        // 刪除圖片
+        if ($allianceAd->image) {
+            Storage::disk('public')->delete($allianceAd->image);
+        }
+
+        $allianceAd->delete();
+
+        return redirect()->route('admin.alliance-ads')->with('success', '聯盟廣告已成功刪除！');
     }
 }
 

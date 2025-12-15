@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ad;
+use App\Models\AllianceAd;
 
 class AdPageController extends Controller
 {
@@ -25,6 +26,11 @@ class AdPageController extends Controller
      */
     public function label()
     {
-        return view('ad_label');
+        $allianceAds = AllianceAd::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('ad_label', compact('allianceAds'));
     }
 }
