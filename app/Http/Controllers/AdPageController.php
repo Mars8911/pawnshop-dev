@@ -9,15 +9,17 @@ use App\Models\TimelineItem;
 class AdPageController extends Controller
 {
     /**
-     * 顯示廣告頁面
+     * 顯示單一廣告頁面
+     *
+     * @param  int  $id
+     * @return \Illuminate\View\View
      */
-    public function show()
+    public function show($id)
     {
-        // 獲取第一個上架的廣告，按排序順序
+        // 根據傳入的 ID 取得對應的已上架廣告，若找不到則回傳 404
         $ad = Ad::where('is_active', true)
-            ->orderBy('sort_order')
-            ->orderBy('created_at', 'desc')
-            ->first();
+            ->where('id', $id)
+            ->firstOrFail();
 
         return view('ad_page', compact('ad'));
     }
