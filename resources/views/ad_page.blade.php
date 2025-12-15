@@ -15,76 +15,96 @@
 
 <body>
     @include('partials.header')
+    @php
+        // 依照後台分類，為各城市小導航找到對應的分類（名稱包含該城市字樣即可）
+        $keelungCategory   = \App\Models\Category::where('name', 'like', '%基隆%')->first();
+        $taipeiCategory    = \App\Models\Category::where('name', 'like', '%台北%')->first();
+        $newtaipeiCategory = \App\Models\Category::where('name', 'like', '%新北%')->first();
+        $taoyuanCategory   = \App\Models\Category::where('name', 'like', '%桃園%')->first();
+        $hsinchuCategory   = \App\Models\Category::where('name', 'like', '%新竹%')->first();
+        $miaoliCategory    = \App\Models\Category::where('name', 'like', '%苗栗%')->first();
+        $taichungCategory  = \App\Models\Category::where('name', 'like', '%台中%')->first();
+        $changhuaCategory  = \App\Models\Category::where('name', 'like', '%彰化%')->first();
+        $nantouCategory    = \App\Models\Category::where('name', 'like', '%南投%')->first();
+        $yunlinCategory    = \App\Models\Category::where('name', 'like', '%雲林%')->first();
+        $chiayiCategory    = \App\Models\Category::where('name', 'like', '%嘉義%')->first();
+        $tainanCategory    = \App\Models\Category::where('name', 'like', '%台南%')->first();
+        $kaohsiungCategory = \App\Models\Category::where('name', 'like', '%高雄%')->first();
+        $pingtungCategory  = \App\Models\Category::where('name', 'like', '%屏東%')->first();
+        $yilanCategory     = \App\Models\Category::where('name', 'like', '%宜蘭%')->first();
+        $hualienCategory   = \App\Models\Category::where('name', 'like', '%花蓮%')->first();
+        $taitungCategory   = \App\Models\Category::where('name', 'like', '%台東%')->first();
+    @endphp
     <!-- 小nav -->
     <nav class="c-small-nav">
         <div class="c-small-nav__container">
             <ul class="c-small-nav__list">
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">基隆</a>
+                    <a href="{{ $keelungCategory ? route('category.show', $keelungCategory->id) : '#' }}" class="c-small-nav__link">基隆</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">台北</a>
+                    <a href="{{ $taipeiCategory ? route('category.show', $taipeiCategory->id) : '#' }}" class="c-small-nav__link">台北</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">新北</a>
+                    <a href="{{ $newtaipeiCategory ? route('category.show', $newtaipeiCategory->id) : '#' }}" class="c-small-nav__link">新北</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">桃園</a>
+                    <a href="{{ $taoyuanCategory ? route('category.show', $taoyuanCategory->id) : '#' }}" class="c-small-nav__link">桃園</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">新竹</a>
+                    <a href="{{ $hsinchuCategory ? route('category.show', $hsinchuCategory->id) : '#' }}" class="c-small-nav__link">新竹</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">苗栗</a>
+                    <a href="{{ $miaoliCategory ? route('category.show', $miaoliCategory->id) : '#' }}" class="c-small-nav__link">苗栗</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">台中</a>
+                    <a href="{{ $taichungCategory ? route('category.show', $taichungCategory->id) : '#' }}" class="c-small-nav__link">台中</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">彰化</a>
+                    <a href="{{ $changhuaCategory ? route('category.show', $changhuaCategory->id) : '#' }}" class="c-small-nav__link">彰化</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">南投</a>
+                    <a href="{{ $nantouCategory ? route('category.show', $nantouCategory->id) : '#' }}" class="c-small-nav__link">南投</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">雲林</a>
+                    <a href="{{ $yunlinCategory ? route('category.show', $yunlinCategory->id) : '#' }}" class="c-small-nav__link">雲林</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">嘉義</a>
+                    <a href="{{ $chiayiCategory ? route('category.show', $chiayiCategory->id) : '#' }}" class="c-small-nav__link">嘉義</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">台南</a>
+                    <a href="{{ $tainanCategory ? route('category.show', $tainanCategory->id) : '#' }}" class="c-small-nav__link">台南</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">高雄</a>
+                    <a href="{{ $kaohsiungCategory ? route('category.show', $kaohsiungCategory->id) : '#' }}" class="c-small-nav__link">高雄</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">屏東</a>
+                    <a href="{{ $pingtungCategory ? route('category.show', $pingtungCategory->id) : '#' }}" class="c-small-nav__link">屏東</a>
                     <span class="c-small-nav__divider">|</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">宜蘭</a>
+                    <a href="{{ $yilanCategory ? route('category.show', $yilanCategory->id) : '#' }}" class="c-small-nav__link">宜蘭</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">花蓮</a>
+                    <a href="{{ $hualienCategory ? route('category.show', $hualienCategory->id) : '#' }}" class="c-small-nav__link">花蓮</a>
                     <span class="c-small-nav__dot">·</span>
                 </li>
                 <li class="c-small-nav__item">
-                    <a href="#" class="c-small-nav__link">台東</a>
+                    <a href="{{ $taitungCategory ? route('category.show', $taitungCategory->id) : '#' }}" class="c-small-nav__link">台東</a>
                 </li>
             </ul>
         </div>
