@@ -67,7 +67,7 @@
   <div class="c-top-header__toolbar-bar">
     <div class="c-top-header__container">
       <div class="c-top-header__toolbar">
-        <a href="#" class="c-top-header__toolbar-link c-top-header__toolbar-link--highlight">借錢廣告</a>
+        <a href="{{ route('ad.label') }}" class="c-top-header__toolbar-link c-top-header__toolbar-link--highlight">借錢廣告</a>
         <span class="c-top-header__toolbar-divider">|</span>
         <a href="{{ route('home') }}" class="c-top-header__toolbar-link c-top-header__toolbar-link--home">返回首頁</a>
       </div>
@@ -85,7 +85,7 @@
         </a>
       </div>
       <div class="col-12 col-md text-center text-md-end">
-        <a href="#" class="c-top-header__ad-link">
+        <a href="{{ route('ad.label') }}" class="c-top-header__ad-link">
           <img
             src="{{ asset('img/logor.gif') }}"
             alt="廣告刊登"

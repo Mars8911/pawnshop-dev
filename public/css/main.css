@@ -12262,6 +12262,18 @@ textarea.form-control-lg {
 .region-block--active {
   background-color: #cc3300 !important;
 }
+.region-block-link {
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.region-block-link:hover {
+  background-color: #666 !important;
+  color: #FFC600 !important;
+}
+.region-block-link:hover .region-title,
+.region-block-link:hover .region-sub {
+  color: #FFC600 !important;
+}
 .region-block .region-sub {
   font-size: 0.75rem;
   font-weight: 600;
@@ -12949,6 +12961,832 @@ textarea.form-control-lg {
 }
 body {
   font-family: "Noto Sans TC", sans-serif;
+}
+
+/* 麵包屑導航 */
+.c-breadcrumb {
+  background-color: #f8f9fa;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.c-breadcrumb__text {
+  color: #495057;
+}
+
+/* 左側導航欄 */
+.c-sidebar-nav {
+  background-color: #e8f4f8;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.c-sidebar-nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  color: #495057;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-left: 3px solid transparent;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.c-sidebar-nav__item:hover {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  text-decoration: none;
+}
+
+.c-sidebar-nav__item--active {
+  background-color: #b8e0e8;
+  color: #0c5460;
+  border-left-color: #0c5460;
+  font-weight: 600;
+}
+
+.c-sidebar-nav__arrow {
+  margin-left: auto;
+  font-size: 1rem;
+  color: #0c5460;
+}
+
+/* 右側內容區 */
+.c-content-panel {
+  background-color: #fff;
+  border-radius: 0.375rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.c-content-panel__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.c-content-panel__title--centered {
+  text-align: center;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+}
+
+.c-content-panel__title--with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.c-content-panel__icon {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+}
+
+.c-content-panel__icon::before,
+.c-content-panel__icon::after {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #0066cc;
+  border-radius: 1px;
+}
+
+.c-content-panel__icon::after {
+  margin-left: 2px;
+}
+
+.c-content-panel__separator {
+  width: 100%;
+  height: 1px;
+  background-color: #dee2e6;
+  margin-bottom: 1.5rem;
+}
+
+.c-content-panel__body {
+  color: #495057;
+  line-height: 1.8;
+}
+
+.c-content-panel__body p {
+  margin-bottom: 1.25rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.c-content-panel__body p:last-child {
+  margin-bottom: 0;
+}
+
+.c-disclaimer__warning {
+  color: #dc3545 !important;
+  font-weight: 600;
+  margin-top: 1.5rem !important;
+}
+
+/* 時間軸列表 */
+.c-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-timeline__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.c-timeline__item:last-child {
+  border-bottom: none;
+}
+
+.c-timeline__date {
+  display: inline-block;
+  background-color: #e9ecef;
+  color: #333;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  min-width: 80px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.c-timeline__text {
+  flex: 1;
+  color: #333;
+  line-height: 1.8;
+  padding-top: 0.25rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 767.98px) {
+  .c-timeline__item {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .c-timeline__date {
+    min-width: auto;
+    width: fit-content;
+  }
+
+  .c-timeline__text {
+    padding-top: 0;
+  }
+}
+
+/* 關於本站區塊 */
+.c-about-section {
+  margin-top: 2.5rem;
+}
+
+.c-about-section__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 1.25rem;
+}
+
+.c-about-section__bar {
+  display: inline-block;
+  width: 6px;
+  height: 24px;
+  background-color: #0066cc;
+  flex-shrink: 0;
+}
+
+.c-about-section__content {
+  color: #333;
+  line-height: 1.8;
+}
+
+.c-about-section__content p {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.c-about-section__content p:last-child {
+  margin-bottom: 0;
+}
+
+.c-about-section__highlight {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+/* 服務項目框 */
+.c-services-box {
+  background-color: #f5f5f5;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.c-services-item {
+  margin-bottom: 1.5rem;
+}
+
+.c-services-item:last-child {
+  margin-bottom: 0;
+}
+
+.c-services-item__label {
+  display: inline-block;
+  background-color: #dc3545;
+  color: #fff;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.c-services-item__text {
+  color: #333;
+  line-height: 1.8;
+  margin: 0;
+  padding-left: 0.25rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 767.98px) {
+  .c-about-section {
+    margin-top: 2rem;
+  }
+
+  .c-about-section__title {
+    font-size: 1.25rem;
+  }
+
+  .c-about-section__bar {
+    height: 20px;
+  }
+
+  .c-services-box {
+    padding: 1.25rem;
+  }
+
+  .c-services-item__label {
+    font-size: 0.9375rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* 聯盟網站卡片 */
+.c-alliance-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1.5rem 0;
+}
+
+.c-alliance-card {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  min-height: 200px;
+}
+
+.c-alliance-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.c-alliance-card__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+}
+
+.c-alliance-card__link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.c-alliance-card__image-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.c-alliance-card__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.c-alliance-card:hover .c-alliance-card__image {
+  transform: scale(1.05);
+}
+
+/* 響應式設計 */
+@media (max-width: 767.98px) {
+  .c-alliance-cards {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .c-alliance-card {
+    min-height: 180px;
+  }
+
+  .c-alliance-card__link {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .c-alliance-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 廣告橫幅 */
+.c-ad-banner {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.c-ad-banner__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.c-ad-banner__subtitle {
+  font-size: 1.125rem;
+  margin: 0;
+  color: #fff;
+  opacity: 0.95;
+}
+
+/* 廣告優勢區塊 */
+.c-ad-advantage {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  border-left: 4px solid #28a745;
+}
+
+.c-ad-advantage__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #28a745;
+  margin-bottom: 1rem;
+}
+
+.c-ad-advantage__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.c-ad-advantage__item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #dee2e6;
+  color: #495057;
+  line-height: 1.8;
+}
+
+.c-ad-advantage__item:last-child {
+  border-bottom: none;
+}
+
+.c-ad-advantage__item strong {
+  color: #28a745;
+  font-weight: 600;
+}
+
+/* 廣告優勢卡片網格 */
+.c-advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.c-advantage-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.c-advantage-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.c-advantage-card__header {
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffd700;
+  line-height: 1.4;
+}
+
+.c-advantage-card__body {
+  padding: 1.5rem;
+  min-height: 120px;
+}
+
+.c-advantage-card__body p {
+  margin: 0 0 0.75rem 0;
+  color: #333;
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.c-advantage-card__body p:last-child {
+  margin-bottom: 0;
+}
+
+.c-advantage-card__footer {
+  color: #dc3545 !important;
+  font-weight: 600;
+  margin-top: 0.75rem !important;
+}
+
+/* 優勢1：青藍色系 */
+.c-advantage-card--teal .c-advantage-card__header {
+  background-color: #20b2aa;
+}
+
+.c-advantage-card--teal .c-advantage-card__body {
+  background-color: #e0f7f5;
+}
+
+/* 優勢2：橙色系 */
+.c-advantage-card--orange .c-advantage-card__header {
+  background-color: #ff7f50;
+}
+
+.c-advantage-card--orange .c-advantage-card__body {
+  background-color: #ffe4e1;
+}
+
+/* 優勢3：綠色系 */
+.c-advantage-card--green .c-advantage-card__header {
+  background-color: #228b22;
+}
+
+.c-advantage-card--green .c-advantage-card__body {
+  background-color: #e8f5e9;
+}
+
+/* 優勢4：紫色系 */
+.c-advantage-card--purple .c-advantage-card__header {
+  background-color: #9370db;
+}
+
+.c-advantage-card--purple .c-advantage-card__body {
+  background-color: #f3e5f5;
+}
+
+/* 響應式設計 */
+@media (max-width: 767.98px) {
+  .c-advantage-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .c-advantage-card__header {
+    padding: 1rem;
+    font-size: 1.125rem;
+  }
+
+  .c-advantage-card__body {
+    padding: 1.25rem;
+    min-height: 100px;
+  }
+
+  .c-advantage-card__body p {
+    font-size: 0.9375rem;
+  }
+}
+
+/* 警告區塊 */
+.c-ad-warning {
+  background-color: #fff3cd;
+  border: 2px solid #dc3545;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.c-ad-warning__title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #dc3545;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.c-ad-warning__content {
+  color: #856404;
+  line-height: 1.8;
+}
+
+.c-ad-warning__content p {
+  margin-bottom: 0.75rem;
+}
+
+.c-ad-warning__content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 價格表格 */
+.c-ad-pricing {
+  background-color: #fff;
+  padding: 0;
+  border-radius: 0.5rem;
+  border-top: 3px solid #dc3545;
+  overflow: hidden;
+}
+
+.c-ad-pricing__table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-bottom: 0;
+}
+
+.c-ad-pricing__table--basic {
+  margin-bottom: 0;
+}
+
+.c-ad-pricing__table--premium {
+  margin-top: 0;
+}
+
+.c-ad-pricing__table thead {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.c-ad-pricing__table th {
+  padding: 1rem;
+  text-align: center;
+  font-weight: 600;
+  border: 1px solid #1e7e34;
+  font-size: 1rem;
+}
+
+.c-ad-pricing__subtitle {
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.9;
+}
+
+.c-ad-pricing__table td {
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #dee2e6;
+  color: #495057;
+  vertical-align: middle;
+}
+
+.c-ad-pricing__table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.c-ad-pricing__table tbody tr:nth-child(even) {
+  background-color: #fffef0;
+}
+
+.c-ad-pricing__table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.c-ad-pricing__disabled {
+  color: #6c757d;
+  position: relative;
+  display: inline-block;
+  padding: 0 0.5rem;
+}
+
+.c-ad-pricing__disabled::before,
+.c-ad-pricing__disabled::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #dc3545;
+  transform-origin: center;
+}
+
+.c-ad-pricing__disabled::before {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.c-ad-pricing__disabled::after {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.c-ad-pricing__price {
+  color: #0066cc;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+.c-ad-pricing__plan-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  position: relative;
+  display: inline-block;
+}
+
+.c-ad-pricing__plan-desc {
+  font-size: 0.875rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+.c-ad-pricing__top-badge {
+  display: inline-block;
+  background-color: #dc3545;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  margin-left: 0.5rem;
+  transform: rotate(-15deg);
+  vertical-align: top;
+}
+
+.c-ad-pricing__footer {
+  background-color: #ffa500;
+  color: #000;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+  margin-top: 0;
+}
+
+/* 聯繫方式區塊 */
+.c-ad-contact {
+  background-color: #fff;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+
+.c-ad-contact__welcome {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0066cc;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.c-ad-contact__hours {
+  font-size: 1.125rem;
+  color: #8b008b;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.c-ad-contact__phone,
+.c-ad-contact__line {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.c-ad-contact__number {
+  color: #0066cc;
+  font-weight: 600;
+}
+
+.c-ad-contact__note {
+  font-size: 0.875rem;
+  color: #dc3545;
+  margin-top: 2rem;
+  line-height: 1.6;
+}
+
+/* 響應式設計 */
+@media (max-width: 767.98px) {
+  .c-sidebar-nav {
+    margin-bottom: 1.5rem;
+  }
+
+  .c-content-panel {
+    padding: 1rem;
+  }
+
+  .c-content-panel__title {
+    font-size: 1.25rem;
+  }
+
+  .c-ad-banner {
+    padding: 1.5rem 1rem;
+  }
+
+  .c-ad-banner__title {
+    font-size: 1.5rem;
+  }
+
+  .c-ad-banner__subtitle {
+    font-size: 1rem;
+  }
+
+  .c-ad-pricing__table {
+    font-size: 0.875rem;
+  }
+
+  .c-ad-pricing__table th,
+  .c-ad-pricing__table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .c-ad-pricing__plan-name,
+  .c-ad-pricing__plan-desc {
+    font-size: 0.8125rem;
+  }
+
+  .c-ad-pricing__price {
+    font-size: 1rem;
+  }
+
+  .c-ad-pricing__footer {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+
+  .c-ad-contact {
+    padding: 2rem 1rem;
+  }
+
+  .c-ad-contact__welcome {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .c-ad-contact__hours {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .c-ad-contact__phone,
+  .c-ad-contact__line {
+    font-size: 1.125rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .c-ad-contact__note {
+    font-size: 0.8125rem;
+    margin-top: 1.5rem;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

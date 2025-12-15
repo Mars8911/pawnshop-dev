@@ -19,4 +19,12 @@ class AdPageController extends Controller
 
         return view('ad_page', compact('ad'));
     }
+
+    /**
+     * 顯示廣告刊登頁面
+     */
+    public function label()
+    {
+        return view('ad_label');
+    }
 }

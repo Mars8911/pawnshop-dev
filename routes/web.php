@@ -11,6 +11,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/category/{id}', [CategoryController::class, 'show'])->name('category.show');
 
 Route::get('/ad', [AdPageController::class, 'show'])->name('ad.page');
+Route::get('/ad-label', [AdPageController::class, 'label'])->name('ad.label');
 
 // 後台管理路由
 Route::prefix('admin')->name('admin.')->group(function () {

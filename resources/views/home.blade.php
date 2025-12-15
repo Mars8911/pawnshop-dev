@@ -15,6 +15,55 @@
 
   @include('partials.header')
   <!-- 內文區 -->
+  @php
+    // 查詢基隆分類（用於台北基隆頁面，會顯示 subcategories）
+    $keelungCategory = \App\Models\Category::where('slug', 'keelung')
+        ->orWhere('name', '基隆')
+        ->first();
+
+    // 查詢新北市分類（用於新北市頁面，會顯示 newcategories）
+    $newtaipeiCategory = \App\Models\Category::where('slug', 'newtaipei')
+        ->orWhere('slug', 'new-taipei')
+        ->orWhere('name', 'like', '%新北市%')
+        ->first();
+
+    // 查詢桃竹苗分類（用於桃竹苗頁面，會顯示 taocategories，優先查詢桃園分類）
+    $taozhumeiCategory = \App\Models\Category::where('name', '桃園')
+        ->orWhere('slug', 'taoyuan')
+        ->orWhere('name', '新竹')
+        ->orWhere('slug', 'hsinchu')
+        ->orWhere('name', '苗栗')
+        ->orWhere('slug', 'miaoli')
+        ->orWhere('name', 'like', '%桃竹苗%')
+        ->first();
+
+    // 查詢中彰投分類（用於中彰投頁面，會顯示 taichungcategories，優先查詢台中分類）
+    $zhongzhangtouCategory = \App\Models\Category::where('name', '台中')
+        ->orWhere('slug', 'taichung')
+        ->orWhere('name', '彰化')
+        ->orWhere('slug', 'changhua')
+        ->orWhere('name', '南投')
+        ->orWhere('slug', 'nantou')
+        ->orWhere('name', 'like', '%中彰投%')
+        ->first();
+
+    // 查詢雲嘉南分類（用於雲嘉南頁面，會顯示 yunlincategories，優先查詢雲林分類）
+    $yunjiananCategory = \App\Models\Category::where('name', '雲林')
+        ->orWhere('slug', 'yunlin')
+        ->orWhere('name', '嘉義')
+        ->orWhere('slug', 'chiayi')
+        ->orWhere('name', 'like', '%雲嘉南%')
+        ->first();
+
+    // 查詢高屏區分類（用於高屏區頁面，會顯示 highcategories，優先查詢高雄分類）
+    $gaopingCategory = \App\Models\Category::where('name', '高雄')
+        ->orWhere('slug', 'kaohsiung')
+        ->orWhere('name', '屏東')
+        ->orWhere('slug', 'pingtung')
+        ->orWhere('name', 'like', '%高屏區%')
+        ->orWhere('name', 'like', '%高屏%')
+        ->first();
+  @endphp
   <main class="py-3">
     <div class="container-fluid">
 
@@ -42,48 +91,48 @@
           <div class="row g-2 g-md-1 justify-content-center">
           <!-- 台北借錢 -->
           <div class="col-6 col-md-4">
-            <div class="region-block">
+            <a href="{{ $keelungCategory ? route('category.show', $keelungCategory->id) : '#' }}" class="text-decoration-none region-block region-block-link">
               <div class="region-title">台北借錢</div>
               <div class="region-sub">借錢<br>管道</div>
-            </div>
+            </a>
           </div>
 
           <!-- 新北借錢 -->
           <div class="col-6 col-md-4">
-            <div class="region-block">
+            <a href="{{ $newtaipeiCategory ? route('category.show', $newtaipeiCategory->id) : '#' }}" class="text-decoration-none region-block region-block-link">
               <div class="region-title">新北借錢</div>
               <div class="region-sub">借錢<br>管道</div>
-            </div>
+            </a>
           </div>
 
           <!-- 桃園借錢 -->
           <div class="col-6 col-md-4">
-            <div class="region-block">
+            <a href="{{ $taozhumeiCategory ? route('category.show', $taozhumeiCategory->id) : '#' }}" class="text-decoration-none region-block region-block-link">
               <div class="region-title">桃園借錢</div>
               <div class="region-sub">借錢<br>管道</div>
-            </div>
+            </a>
           </div>
 
           <!-- 下面第二排（台中借錢、台南借錢、高雄借錢） -->
           <div class="col-6 col-md-4">
-            <div class="region-block">
+            <a href="{{ $zhongzhangtouCategory ? route('category.show', $zhongzhangtouCategory->id) : '#' }}" class="text-decoration-none region-block region-block-link">
               <div class="region-title">台中借錢</div>
               <div class="region-sub">借錢<br>管道</div>
-            </div>
+            </a>
           </div>
 
           <div class="col-6 col-md-4">
-            <div class="region-block">
+            <a href="{{ $yunjiananCategory ? route('category.show', $yunjiananCategory->id) : '#' }}" class="text-decoration-none region-block region-block-link">
               <div class="region-title">台南借錢</div>
               <div class="region-sub">借錢<br>管道</div>
-            </div>
+            </a>
           </div>
 
           <div class="col-6 col-md-4">
-            <div class="region-block">
+            <a href="{{ $gaopingCategory ? route('category.show', $gaopingCategory->id) : '#' }}" class="text-decoration-none region-block region-block-link">
               <div class="region-title">高雄借錢</div>
               <div class="region-sub">借錢<br>管道</div>
-            </div>
+            </a>
           </div>
           </div>
         </div>
