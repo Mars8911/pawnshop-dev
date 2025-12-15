@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ad;
 use App\Models\AllianceAd;
+use App\Models\TimelineItem;
 
 class AdPageController extends Controller
 {
@@ -31,6 +32,11 @@ class AdPageController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('ad_label', compact('allianceAds'));
+        $timelineItems = TimelineItem::where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return view('ad_label', compact('allianceAds', 'timelineItems'));
     }
 }

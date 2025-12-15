@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use App\Models\Category;
 use App\Models\Ad;
 use App\Models\AllianceAd;
+use App\Models\TimelineItem;
 
 class AdminController extends Controller
 {
@@ -69,6 +70,43 @@ class AdminController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');
+    }
+
+    /**
+     * 顯示修改密碼表單
+     */
+    public function showChangePasswordForm()
+    {
+        return view('admin.change-password');
+    }
+
+    /**
+     * 更新管理員密碼
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:6|confirmed',
+        ], [
+            'current_password.required' => '請輸入目前密碼',
+            'new_password.required' => '請輸入新密碼',
+            'new_password.min' => '新密碼至少需要 6 個字元',
+            'new_password.confirmed' => '新密碼與確認密碼不相符',
+        ]);
+
+        $user = Auth::user();
+
+        // 驗證目前密碼
+        if (!\Illuminate\Support\Facades\Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => '目前密碼錯誤'])->withInput();
+        }
+
+        // 更新密碼
+        $user->password = \Illuminate\Support\Facades\Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->route('admin.dashboard')->with('success', '密碼已成功更新！');
     }
 
     /**
@@ -381,6 +419,89 @@ class AdminController extends Controller
         $allianceAd->delete();
 
         return redirect()->route('admin.alliance-ads')->with('success', '聯盟廣告已成功刪除！');
+    }
+
+    /**
+     * 顯示網站記事管理頁面
+     */
+    public function timelineItems()
+    {
+        $timelineItems = TimelineItem::orderBy('sort_order')->orderBy('date', 'desc')->get();
+        return view('admin.timeline-items', compact('timelineItems'));
+    }
+
+    /**
+     * 顯示新增網站記事表單
+     */
+    public function createTimelineItem()
+    {
+        return view('admin.timeline-item-form');
+    }
+
+    /**
+     * 儲存新網站記事
+     */
+    public function storeTimelineItem(Request $request)
+    {
+        $request->validate([
+            'date' => 'required|string|max:20',
+            'text' => 'required|string|max:30',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        TimelineItem::create([
+            'date' => $request->date,
+            'text' => $request->text,
+            'sort_order' => $request->sort_order ?? 0,
+            'is_active' => $request->has('is_active'),
+        ]);
+
+        return redirect()->route('admin.timeline-items')->with('success', '網站記事已成功建立！');
+    }
+
+    /**
+     * 顯示編輯網站記事表單
+     */
+    public function editTimelineItem($id)
+    {
+        $timelineItem = TimelineItem::findOrFail($id);
+        return view('admin.timeline-item-form', compact('timelineItem'));
+    }
+
+    /**
+     * 更新網站記事
+     */
+    public function updateTimelineItem(Request $request, $id)
+    {
+        $timelineItem = TimelineItem::findOrFail($id);
+
+        $request->validate([
+            'date' => 'required|string|max:20',
+            'text' => 'required|string|max:30',
+            'sort_order' => 'nullable|integer',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $timelineItem->update([
+            'date' => $request->date,
+            'text' => $request->text,
+            'sort_order' => $request->sort_order ?? 0,
+            'is_active' => $request->has('is_active'),
+        ]);
+
+        return redirect()->route('admin.timeline-items')->with('success', '網站記事已成功更新！');
+    }
+
+    /**
+     * 刪除網站記事
+     */
+    public function deleteTimelineItem($id)
+    {
+        $timelineItem = TimelineItem::findOrFail($id);
+        $timelineItem->delete();
+
+        return redirect()->route('admin.timeline-items')->with('success', '網站記事已成功刪除！');
     }
 }
 

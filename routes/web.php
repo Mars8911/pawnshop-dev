@@ -26,6 +26,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
         Route::post('/logout', [AdminController::class, 'logout'])->name('logout');
 
+        // 修改密碼
+        Route::get('/change-password', [AdminController::class, 'showChangePasswordForm'])->name('password.change');
+        Route::post('/change-password', [AdminController::class, 'updatePassword'])->name('password.update');
+
         // 分類管理
         Route::get('/categories', [AdminController::class, 'categories'])->name('categories');
         Route::get('/categories/create', [AdminController::class, 'createCategory'])->name('categories.create');
@@ -49,5 +53,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/alliance-ads/{id}/edit', [AdminController::class, 'editAllianceAd'])->name('alliance-ads.edit');
         Route::put('/alliance-ads/{id}', [AdminController::class, 'updateAllianceAd'])->name('alliance-ads.update');
         Route::delete('/alliance-ads/{id}', [AdminController::class, 'deleteAllianceAd'])->name('alliance-ads.delete');
+
+        // 網站記事管理
+        Route::get('/timeline-items', [AdminController::class, 'timelineItems'])->name('timeline-items');
+        Route::get('/timeline-items/create', [AdminController::class, 'createTimelineItem'])->name('timeline-items.create');
+        Route::post('/timeline-items', [AdminController::class, 'storeTimelineItem'])->name('timeline-items.store');
+        Route::get('/timeline-items/{id}/edit', [AdminController::class, 'editTimelineItem'])->name('timeline-items.edit');
+        Route::put('/timeline-items/{id}', [AdminController::class, 'updateTimelineItem'])->name('timeline-items.update');
+        Route::delete('/timeline-items/{id}', [AdminController::class, 'deleteTimelineItem'])->name('timeline-items.delete');
     });
 });

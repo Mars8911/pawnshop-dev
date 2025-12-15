@@ -258,42 +258,14 @@
             </h2>
             <div class="c-content-panel__body">
               <ul class="c-timeline">
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2014/09</span>
-                  <span class="c-timeline__text">上線營運,網站細節調整。</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2014/10</span>
-                  <span class="c-timeline__text">文字版借貸廣告上線。</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2015/01</span>
-                  <span class="c-timeline__text">圖像版借貸廣告上線。</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2015/02</span>
-                  <span class="c-timeline__text">原站名「台灣救急網」,更名為「台灣借錢網」。</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2015/07</span>
-                  <span class="c-timeline__text">「廣告樣式」創新改版,改以用戶導向設計,並增加「行動裝置應用」貼心設計。</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2015/08</span>
-                  <span class="c-timeline__text">新增「手機版」上線,行動裝置導覽本站,自動跳轉至手機版;用戶體驗大升級!</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2015/10</span>
-                  <span class="c-timeline__text">網站流量統計,突破單月1萬。</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2016/05</span>
-                  <span class="c-timeline__text">Google關鍵字進站統計,單月突破1萬!(網站流量1.8萬)</span>
-                </li>
-                <li class="c-timeline__item">
-                  <span class="c-timeline__date">2017/10</span>
-                  <span class="c-timeline__text">為避免單一網站搜尋流量極限,新建30多個網站,同步聯播導流,廣告效益再提升!</span>
-                </li>
+                @forelse($timelineItems as $item)
+                  <li class="c-timeline__item">
+                    <span class="c-timeline__date">{{ $item->date }}</span>
+                    <span class="c-timeline__text">{{ $item->text }}</span>
+                  </li>
+                @empty
+                  <li style="text-align: center; color: #666; padding: 20px;">目前沒有網站記事</li>
+                @endforelse
               </ul>
             </div>
 
