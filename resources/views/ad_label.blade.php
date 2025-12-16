@@ -134,7 +134,7 @@
             <div class="c-content-panel__body">
               <!-- 黃色橫幅區塊 -->
               <div class="c-ad-banner">
-                <h3 class="c-ad-banner__title">Tw97台灣借錢網 廣告方案</h3>
+                <h3 class="c-ad-banner__title"> 6957tw台灣借錢網 廣告方案</h3>
                 <p class="c-ad-banner__subtitle">一站刊登,多站導流,排名領先,效益卓越</p>
               </div>
 
@@ -277,7 +277,7 @@
               </h3>
               <div class="c-about-section__content">
                 <p>
-                6957tw.台灣借錢網於2014年9月7日正式上線營運,服務網址為Tw97.net。本網站以<span class="c-about-section__highlight">專業</span>、<span class="c-about-section__highlight">優質</span>、<span class="c-about-section__highlight">創新</span>的服務理念,致力成為<span class="c-about-section__highlight">台灣最大借錢資訊平台</span>,為借貸業者增加曝光量、建立品牌形象、吸引更多借錢客源。
+                6957tw.台灣借錢網於2014年9月7日正式上線營運,服務網址為 6957tw。本網站以<span class="c-about-section__highlight">專業</span>、<span class="c-about-section__highlight">優質</span>、<span class="c-about-section__highlight">創新</span>的服務理念,致力成為<span class="c-about-section__highlight">台灣最大借錢資訊平台</span>,為借貸業者增加曝光量、建立品牌形象、吸引更多借錢客源。
                 </p>
               </div>
             </div>

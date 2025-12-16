@@ -184,9 +184,9 @@
             <div class="c-ad-content">
 
                <div class="adbox">
-                <img src="{{ asset('img/tw97-safety-01.gif') }}" alt="小額借款廣告" class="c-ad-content__main-image">
-                <img src="{{ asset('img/tw97-safety-02.gif') }}" alt="小額借款廣告" class="c-ad-content__main-image">
-                <img src="{{ asset('img/tw97-safety-03.gif') }}" alt="小額借款廣告" class="c-ad-content__main-image">
+                <img src="{{ asset('img/ 6957tw-safety-01.gif') }}" alt="小額借款廣告" class="c-ad-content__main-image">
+                <img src="{{ asset('img/ 6957tw-safety-02.gif') }}" alt="小額借款廣告" class="c-ad-content__main-image">
+                <img src="{{ asset('img/ 6957tw-safety-03.gif') }}" alt="小額借款廣告" class="c-ad-content__main-image">
                 <!-- 文字區塊 -->
                 <div class="c-safety-notice">
                     <h3 class="c-safety-notice__title">安全借錢,三不守則</h3>
